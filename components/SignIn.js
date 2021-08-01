@@ -2,6 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import {firebaseApp} from '../firebase-config';
+import axios from "axios";
+import { HOST_URL } from '../commonConfig'
 import { StackActions, NavigationActions } from 'react-navigation'; 
 
 
@@ -18,26 +21,44 @@ class SignIn extends React.Component {
     console.log("Working");
     const email = this.state.email;
     const password = this.state.password;
-
-    firebaseApp.auth().signInWithEmailAndPassword(email, password)
-    .then(() => {
-      console.log(email);
-      const navigateAction = StackActions.reset({
-        index: 0,
-        actions: [NavigationActions.navigate({ routeName: "Home" })],
-      });
-      this.props.navigation.dispatch(navigateAction);
-      this.textInput1.clear()
-      this.textInput2.clear()
+    
+    firebaseApp.auth().signInWithEmailAndPassword(email, password).then(() =>
+    {
+      axios.post(HOST_URL + "user/login",{
+        email: this.state.email,
+        password: this.state.password,
+      }).then((res) => {
+      
+        console.log(res.data);
+        if(res.data.userType === "user")
+        {
+          const navigateAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: "Home" })],
+          });
+          this.props.navigation.dispatch(navigateAction);
+        }
+  
+        else
+        {
+          const navigateAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: "adminCategoryList" })],
+          });
+          this.props.navigation.dispatch(navigateAction);
+        }
+      
+        this.textInput1.clear()
+        this.textInput2.clear()
+      }).catch((e) => {
+        console.log(e);
+        console.log("Not a valid user");
+        alert("Not a valid user");
+        this.setState({error: 'Authentication failed', isLoading: false})
+      })
     })
-    .catch((e) => {
-      console.log(e);
-      console.log("Not a valid user");
-      alert("Not a valid user");
-      this.setState({error: 'Authentication failed', isLoading: false})
-    })
+    
   }
-
 
   render()
   {
@@ -100,8 +121,6 @@ class SignIn extends React.Component {
                       actions: [NavigationActions.navigate({ routeName: "Home" })],
                     });
                     this.props.navigation.dispatch(navigateAction);}}>Skip and Go to Home</Text>
-            
-
         </View>
         
       </View>

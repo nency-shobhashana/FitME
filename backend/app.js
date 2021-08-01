@@ -12,11 +12,11 @@ app.options('*', cors());
 mongoose.set('useFindAndModify', false);
 
 //Import Routes
+const authRoute = require('./routes/auth');
+//const authRoute = require('./routes/auth');
 
-// const categoryRoute = require('./routes/category');
 
 //Routes
-
 app.get('/', (req, res) => {
     res.send("Welcome to Home");
 })
@@ -29,7 +29,8 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, (err) =>{
     }else{
         console.log('Connected to db');
     }
-    // app.use('/category', categoryRoute);
+    app.use('/user', authRoute);
+    //app.use('/user', authRoute);
 })
 
 app.listen(3000);

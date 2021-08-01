@@ -2,7 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons'; 
+import { AntDesign } from '@expo/vector-icons';
+import {firebaseApp} from '../firebase-config'; 
+import axios from "axios";
+import { HOST_URL } from '../commonConfig'
 
 import { StackActions, NavigationActions } from 'react-navigation'; 
 
@@ -44,20 +47,19 @@ class SignUp extends React.Component   {
       .then((res) => {
         console.log(firebaseApp.auth().currentUser.uid);
         const uid = firebaseApp.auth().currentUser.uid;
-        const db = firebaseApp.firestore();
-        db.collection('user').doc(uid).set({
-          firstname: this.state.firstname,
-          lastname: this.state.lastname,
-          email: this.state.email,
-          type: "user"
-          }).then(() => {
+       
+          axios.post(HOST_URL + "user/register",{
+            email: this.state.email,
+            password: this.state.password,
+            type: "user",
+            userid: firebaseApp.auth().currentUser.uid,
+          })
+          .then(() => {
         alert('User registered successfully!')
         this.setState({
           isLoading: false,
           email: '', 
-          password: '',
-          firstname: '',
-          lastname: '',
+          password: ''
         })
         this.props.navigation.navigate('Login')
       })
@@ -65,7 +67,6 @@ class SignUp extends React.Component   {
     })
       .catch(error =>{
         console.log(error);
-        //this.setState({ errorMessage: error.message })
       })      
 }
 
@@ -117,7 +118,7 @@ class SignUp extends React.Component   {
 
               {/* First name */}
 
-              <Text style={[styles.text_footer, {marginTop: 40}]}>First Name</Text>
+              {/* <Text style={[styles.text_footer, {marginTop: 40}]}>First Name</Text>
               <View style={styles.action}>
                   <AntDesign 
                   name = 'user'
@@ -126,11 +127,11 @@ class SignUp extends React.Component   {
                   style = {styles.inputIcon}
                   />
                   <TextInput style={styles.TextInput} placeholder="First Name" value={this.state.firstname} onChangeText={(val) => this.updateInputVal(val, 'firstname')}></TextInput>
-              </View>
+              </View> */}
 
               {/* Last name */}
 
-              <Text style={[styles.text_footer, {marginTop: 40}]}>Last Name</Text>
+              {/* <Text style={[styles.text_footer, {marginTop: 40}]}>Last Name</Text>
               <View style={styles.action}>
                   <AntDesign 
                   name="user"
@@ -139,7 +140,7 @@ class SignUp extends React.Component   {
                   style = {styles.inputIcon}
                   />
                   <TextInput style={styles.TextInput} placeholder="Last Name" value={this.state.lastname} onChangeText={(val) => this.updateInputVal(val, 'lastname')}></TextInput>
-              </View>
+              </View> */}
 
               <View style={styles.signUpbutton}>
                   <TouchableOpacity style={[styles.signUp, {color: 'black'}]} onPress={() => this.registerUser()}>
