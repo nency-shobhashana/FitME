@@ -16,6 +16,22 @@ class Home extends React.Component {
     this.state = {email: '', password: '',isLoading: false, error: ''}
   }
 
+  signOutUser = async () => {
+    var self = this;
+    try {
+      await firebaseApp.auth().signOut();
+
+      const navigateAction = StackActions.reset({
+        index: 0,
+        key: null,
+        actions: [NavigationActions.navigate({ routeName: 'SignIn' })],
+      });
+      self.props.navigation.dispatch(navigateAction);
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
   
 
   render()
@@ -24,6 +40,11 @@ class Home extends React.Component {
     <ScrollView>
       <View style={styles.container}>
         <Text>Welcome to Home</Text>
+        <View style={styles.profileFooterBtn}>
+          <TouchableOpacity style={styles.button} onPress={() => this.signOutUser()}>
+            <Text>Logout</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
@@ -149,8 +170,24 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
 
+  profileFooterBtn:
+  {
+    paddingTop: '5%',
+    paddingRight: '75%',
+    color: 'red',
+    fontSize: 20,
+  },
 
-  
+  button: {
+    margin: 12,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    borderColor: '#EB6C3E',
+    borderWidth: 1,
+    backgroundColor: '#EB6C3E',
+  }
 });
 
 export default Home;
