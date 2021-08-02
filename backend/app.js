@@ -13,7 +13,7 @@ mongoose.set('useFindAndModify', false);
 
 //Import Routes
 const authRoute = require('./routes/auth');
-//const authRoute = require('./routes/auth');
+const categoryRoute = require('./routes/category');
 
 
 //Routes
@@ -30,7 +30,7 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, (err) =>{
         console.log('Connected to db');
     }
     app.use('/user', authRoute);
-    //app.use('/user', authRoute);
+    app.use('/category', categoryRoute);
 })
 
 app.listen(3000);
