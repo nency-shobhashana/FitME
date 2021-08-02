@@ -6,6 +6,7 @@ import {firebaseApp} from '../firebase-config';
 import axios from "axios";
 import { HOST_URL } from '../commonConfig'
 import { StackActions, NavigationActions } from 'react-navigation'; 
+import  firebase from 'firebase';
 
 
 class SignIn extends React.Component {
@@ -57,8 +58,35 @@ class SignIn extends React.Component {
         this.setState({error: 'Authentication failed', isLoading: false})
       })
     })
-    
   }
+
+googleSignUp = () =>
+{
+  var provider = new firebase.auth.GoogleAuthProvider();
+  firebaseApp.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebaseApp.auth.OAuthCredential} */
+    var credential = result.credential;
+
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+    this.props.navigation.navigate('Home')
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+}
+
 
   render()
   {
@@ -110,7 +138,7 @@ class SignIn extends React.Component {
             </View>
 
             <View style={styles.signGoogle}>
-                  <TouchableOpacity style={[styles.signUpGoogle, {color: 'black'}]} onPress={() => this.registerUser()}>
+                  <TouchableOpacity style={[styles.signUpGoogle, {color: 'black'}]} onPress={() => this.googleSignUp()}>
                       <Text style={styles.signUpGoogleText}>Continue with Google</Text>
                   </TouchableOpacity>    
               </View>
