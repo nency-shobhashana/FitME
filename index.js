@@ -6,6 +6,8 @@ import SignUp from './components/SignUp';
 import Home from './components/Home';
 import adminCategoryList from './components/admin/CategoryList';
 import adminCategory from './components/admin/Category';
+import adminProductList from './components/admin/ProductList';
+import adminProduct from './components/admin/Product';
 
 const Navigator = createStackNavigator({
   
@@ -14,6 +16,8 @@ const Navigator = createStackNavigator({
   Home: { screen: Home },
   adminCategoryList: { screen: adminCategoryList },
   adminCategory: { screen: adminCategory },
+  adminProductList: { screen: adminProductList },
+  adminProduct: { screen: adminProduct }
 },
 
 {
