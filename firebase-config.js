@@ -32,6 +32,7 @@ export async function uploadImageAsync(uri, name) {
   });
   console.log("uploadImageAsync");
   const ref = firebaseApp.storage().ref().child("image/"+ name);
+  console.log(ref);
   const snapshot = await ref.put(blob);
 
   

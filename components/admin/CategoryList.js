@@ -66,7 +66,7 @@ export default class Category extends Component {
       <View style={styles.container}>
         <View style={styles.signUpbutton}>
             <TouchableOpacity style={[styles.signUp]} onPress={()=>{this.props.navigation.navigate('adminCategory')}}>
-                <Text style={[{textAlign: 'center'}]} >Add New Category</Text>
+                <Text style={[styles.signbtnText, {textAlign: 'center'}]} >Add New Category</Text>
             </TouchableOpacity>
         </View>
         <SafeAreaView>
@@ -127,7 +127,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
-    backgroundColor: '#75C34D'
+    backgroundColor: '#EB6C3E',
+    color: '#FFF'
   },
   signbtnText:
   {
@@ -179,6 +180,6 @@ const styles = StyleSheet.create({
   },
   rightIcon:{
     flexShrink:1,
-    color: '#75c34d',
+    color: '#EB6C3E',
   }
 });

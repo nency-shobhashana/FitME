@@ -89,7 +89,7 @@ export default class Category extends Component {
             <TextInput style={styles.TextInput} placeholder="Type category name" value={this.state.categoryName} onChangeText={this.onChangeCategoryName}/>
           </View>
           <View>
-            <Button
+            <Button color="#EB6C3E"
               onPress={this._pickImage}
               title="Pick an image"
             />
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
-    backgroundColor: '#75C34D'
+    backgroundColor: '#EB6C3E'
   },
   signbtnText:
   {
@@ -164,5 +164,6 @@ const styles = StyleSheet.create({
     // flex: 1,
     // fontSize: 25,
     padding: 15,
+    marginBottom: 20,
   },
 });
