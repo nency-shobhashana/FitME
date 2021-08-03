@@ -1,6 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from 'react-native';
+import {firebaseApp} from '../../firebase-config';
+import { StackActions, NavigationActions } from 'react-navigation'; 
+
 
 class Dashboard extends React.Component {
 
@@ -10,7 +13,22 @@ class Dashboard extends React.Component {
     this.state = {email: '', password: '',isLoading: false, error: ''}
   }
 
+  signOutUser = async () => {
+    var self = this;
+    try {
+      await firebaseApp.auth().signOut();
 
+      const navigateAction = StackActions.reset({
+        index: 0,
+        key: null,
+        actions: [NavigationActions.navigate({ routeName: 'SignIn' })],
+      });
+      self.props.navigation.dispatch(navigateAction);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  
 
   render()
   {
@@ -28,7 +46,6 @@ class Dashboard extends React.Component {
   );
   }  
 }
-
 
 const styles = StyleSheet.create({
   container: {

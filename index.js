@@ -15,7 +15,7 @@ const Navigator = createStackNavigator({
   SignIn: { screen: SignIn },
   SignUp: { screen: SignUp },
   Home: { screen: Home },
-  Dashboard: { screen: Drawers},
+  Dashboard: { screen: Drawers, navigationOptions: {headerShown: false}},
   adminCategoryList: { screen: adminCategoryList },
   adminCategory: { screen: adminCategory },
   adminProductList: { screen: adminProductList },

@@ -111,7 +111,7 @@ googleSignUp = () =>
       <View style={styles.container}>
         
           <View style={styles.header}>
-            {/* <Image source={require('./assets/logo.png')}/> */}
+            <Image source={require('../assets/logo.png')}/>
             <Text style={styles.titleText}>
               Create an Account Here!
             </Text>
@@ -206,7 +206,8 @@ const styles = StyleSheet.create({
 
   header: {
    flex: 1,
-   justifyContent: 'flex-end',
+   justifyContent: 'center',
+   alignItems: 'center',
    paddingHorizontal: 20,
    paddingBottom: 50,
   },
@@ -226,7 +227,7 @@ const styles = StyleSheet.create({
 
   titleText:
   {
-    color: '#fff',
+    color: '#58514E',
     fontSize: 20,
     fontWeight: 'bold',
     paddingTop: 10,
