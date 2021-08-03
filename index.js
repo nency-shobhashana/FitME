@@ -9,6 +9,7 @@ import adminCategoryList from './components/admin/CategoryList';
 import adminCategory from './components/admin/Category';
 import adminProductList from './components/admin/ProductList';
 import adminProduct from './components/admin/Product';
+import UserDetail from './components/UserDetail';
 
 const Navigator = createStackNavigator({
   
@@ -19,7 +20,8 @@ const Navigator = createStackNavigator({
   adminCategoryList: { screen: adminCategoryList },
   adminCategory: { screen: adminCategory },
   adminProductList: { screen: adminProductList },
-  adminProduct: { screen: adminProduct }
+  adminProduct: { screen: adminProduct },
+  UserDetail: { screen: UserDetail}
 },
 
 {
