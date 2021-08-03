@@ -85,10 +85,10 @@ export default class Category extends Component {
                 </View>
                 <Text style={styles.itemText}>{item.name}</Text>
                 {/* <Text style={styles.productCount}>{item.count}</Text> */}
-                <TouchableOpacity style={styles.item} onPress={() => this.editCategory( item._id)}>
+                <TouchableOpacity style={styles.button} onPress={() => this.editCategory( item._id)}>
                     <AntDesign style={styles.rightIcon} name="edit" size={24} color="black" />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.item} onPress={() => this.deleteCategory( item._id)}>
+                <TouchableOpacity style={styles.button} onPress={() => this.deleteCategory( item._id)}>
                     <AntDesign style={styles.rightIcon} name="delete" size={24} color="black" />
                 </TouchableOpacity>
               </View>
@@ -142,6 +142,16 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   item: {
+    padding: 12,
+    borderColor: '#000',
+    // backgroundColor: '#e2ffd4',
+    borderBottomWidth: 1,
+    borderRadius: 5,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  button: {
     padding: 12,
     borderColor: '#000',
     // backgroundColor: '#e2ffd4',

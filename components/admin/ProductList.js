@@ -67,7 +67,6 @@ export default class Product extends Component {
                 />
               </View>
               <Text style={styles.itemText}>{item.name}</Text>
-              <Text style={styles.itemPrice}>$ {item.price}</Text>
               <TouchableOpacity style={styles.button} onPress={() => this.editProduct( item._id)}>
                     <AntDesign style={styles.rightIcon} name="edit" size={24} color="black" />
                 </TouchableOpacity>
@@ -147,6 +146,7 @@ const styles = StyleSheet.create({
   itemText: {
     marginLeft: 10,
     marginTop: 3,
+    flexGrow: 2,
     fontSize: 20,
     fontWeight: 'bold',
   },
