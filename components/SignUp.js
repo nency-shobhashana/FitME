@@ -63,7 +63,7 @@ class SignUp extends React.Component   {
           email: '', 
           password: ''
         })
-        this.props.navigation.navigate('Login')
+        this.props.navigation.navigate('UserDetail')
       })
       
     })

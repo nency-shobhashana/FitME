@@ -3,13 +3,17 @@ import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput} from 'react-native';
 import {Picker} from "@react-native-picker/picker";
 import DatePicker from 'react-native-datepicker';
+import axios from "axios";
+import {firebaseApp} from '../firebase-config'; 
+import { HOST_URL } from '../commonConfig'
+
 
 class UserDetail extends React.Component {
 
     constructor(props) 
     {
       super(props);
-      this.state = {firstname: '', date: '', bmi: '', currentDate: new Date().getDate(), height: '', weight: '',gender: '',isLoading: false, error: '', selectedcat: "", category: [
+      this.state = {firstname: '', date: '', bmi: '', currentDate: new Date().getDate(), height: '', weight: '',isLoading: false, error: '', selectedcat: "", category: [
         {
           itemName: "Male"
         },
@@ -22,6 +26,27 @@ class UserDetail extends React.Component {
     async onValueChangeCat(value) {
       this.setState({ selectedcat: value });
     }
+
+    addData = () =>
+    {
+      const uid = firebaseApp.auth().currentUser.uid;
+      axios.post(HOST_URL + "userInfo/add", {
+        firstname: this.state.firstname,
+        gender: this.state.selectedcat,
+        date: this.state.date,
+        height: this.state.height,
+        weight: this.state.weight,
+        userId: uid,
+      })
+      .then(res => {
+        alert("User data added succesfully");
+        this.props.navigation.navigate('SignIn')
+      }).catch(error =>{
+        console.log(error);
+      })   
+
+    }
+
   
     render()
     {
@@ -90,22 +115,16 @@ class UserDetail extends React.Component {
                   <TextInput style={styles.resultText} placeholder="Height in m" onChangeText={height => this.setState({ height })} value={this.state.height} />
 
                   <Text style={[styles.text_footer, { margin: 10 }, { fontSize: 15 }]}>Enter the Weight</Text>
-                  <TextInput style={styles.resultText} placeholder="Weight in kg" onChangeText={height => this.setState({ height })} value={this.state.height} />
+                  <TextInput style={styles.resultText} placeholder="Weight in kg" onChangeText={weight => this.setState({ weight })} value={this.state.weight} />
 
                   <Text style={[styles.text_section, { margin: 10}, { fontSize: 15 }]}>Your BMI is</Text>
 
                   <View style={styles.submitbutton}>
-                    <TouchableOpacity style={[styles.submit, {color: 'black'}]} onPress={() => this.signIn()}>
+                    <TouchableOpacity style={[styles.submit, {color: 'black'}]} onPress={() => this.addData()}>
                       <Text style={styles.submitbtnText}>Submit</Text>
                     </TouchableOpacity>    
                   </View>
-
-
           </View>
-
-
-          
-
         </View>
       </ScrollView>
     );

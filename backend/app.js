@@ -15,7 +15,7 @@ mongoose.set('useFindAndModify', false);
 const authRoute = require('./routes/auth');
 const categoryRoute = require('./routes/category');
 const productRoute = require('./routes/product');
-
+const userRoute = require('./routes/userInfo');
 
 //Routes
 app.get('/', (req, res) => {
@@ -31,6 +31,7 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, (err) =>{
         console.log('Connected to db');
     }
     app.use('/user', authRoute);
+    app.use('/userInfo', userRoute);
     app.use('/category', categoryRoute);
     app.use('/product', productRoute);
 })
