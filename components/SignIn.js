@@ -42,11 +42,12 @@ class SignIn extends React.Component {
   
         else
         {
-          const navigateAction = StackActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: "adminCategoryList" })],
-          });
-          this.props.navigation.dispatch(navigateAction);
+          // const navigateAction = StackActions.reset({
+          //   index: 0,
+          //   actions: [NavigationActions.navigate({ routeName: "Dashboard" })],
+          // });
+          //this.props.navigation.dispatch(navigateAction);
+          this.props.navigation.navigate('Dashboard');
         }
       
         this.textInput1.clear()

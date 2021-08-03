@@ -1,9 +1,10 @@
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack'
+import { createStackNavigator } from 'react-navigation-stack';
 
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
+import Drawers from './components/admin/Drawers';
 import adminCategoryList from './components/admin/CategoryList';
 import adminCategory from './components/admin/Category';
 import adminProductList from './components/admin/ProductList';
@@ -14,6 +15,7 @@ const Navigator = createStackNavigator({
   SignIn: { screen: SignIn },
   SignUp: { screen: SignUp },
   Home: { screen: Home },
+  Dashboard: { screen: Drawers},
   adminCategoryList: { screen: adminCategoryList },
   adminCategory: { screen: adminCategory },
   adminProductList: { screen: adminProductList },
@@ -26,7 +28,6 @@ const Navigator = createStackNavigator({
 }
 
 );
-
 
 const App = createAppContainer(Navigator);
 
