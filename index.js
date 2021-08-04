@@ -11,19 +11,26 @@ import adminProductList from './components/admin/ProductList';
 import adminProduct from './components/admin/Product';
 import UserDetail from './components/UserDetail';
 import HomeScreen from './components/HomeScreen';
+import Chat from './components/Chat';
+import Progress from './components/Progress';
+import Plan from './components/Plan';
+import Me from './components/Me';
 
 const Navigator = createStackNavigator({
   
   SignIn: { screen: SignIn },
   SignUp: { screen: SignUp },
-  Home: { screen: Home },
+  Home: { screen: HomeScreen, navigationOptions: {headerShown: false}  },
   Dashboard: { screen: Drawers, navigationOptions: {headerShown: false}},
   adminCategoryList: { screen: adminCategoryList },
   adminCategory: { screen: adminCategory },
   adminProductList: { screen: adminProductList },
   adminProduct: { screen: adminProduct },
   UserDetail: { screen: UserDetail},
-  HomeScreen: {screen: HomeScreen},
+  Chat: { screen: Chat},
+  Progress: { screen: Progress},
+  Plan: { screen: Plan},
+  Me: { screen: Me},
 },
 
 {

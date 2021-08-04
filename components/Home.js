@@ -73,7 +73,7 @@ class Home extends React.Component {
     <ScrollView>
       <View style={styles.container}>
       
-      <Card style={{width: '100%', height: 40, paddingTop: 10, marginTop: 10, alignItems: 'center', justifyContent: 'center'}}>
+      {/* <Card style={{width: '100%', height: 40, paddingTop: 10, marginTop: 10, alignItems: 'center', justifyContent: 'center'}}>
         <Text style={styles.dateText}>{new Date().getDate()}/{new Date().getMonth() + 1}/{new Date().getFullYear()}</Text>
       </Card>
 
@@ -160,7 +160,7 @@ class Home extends React.Component {
             </View>
 
         </View>
-      </Card>
+      </Card> */}
 
       
 
