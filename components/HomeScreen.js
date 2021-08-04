@@ -77,7 +77,7 @@ class HomeScreen extends React.Component {
         <Text style={styles.dateText}>{new Date().getDate()}/{new Date().getMonth() + 1}/{new Date().getFullYear()}</Text>
       </Card>
 
-      <Card style={{width: '100%', height: 200, paddingTop: 10, marginTop: 10}}>
+      <Card style={{width: '100%', height: 180, paddingTop: 10, marginTop: 10}}>
         <View style={{alignItems: 'center'}}>
             <Text style={styles.bmiText}>Your Current BMI is {this.state.currentBmi}</Text>
         </View>
@@ -98,8 +98,11 @@ class HomeScreen extends React.Component {
         </View>
       </Card>
 
+
+      <Text style={[styles.text_section, { margin: 10 }]}>Recipes</Text>
+
       <View style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
-            <Card style={{width: '49%', height: 200, paddingTop: 10, marginTop: 10}}>
+            <Card style={[styles.cardStyle]}>
 
                     <View style={{alignItems: 'center', padding: 10}}>
                         <Image source={require('../assets/recipe1.png')}/>
@@ -110,7 +113,7 @@ class HomeScreen extends React.Component {
                     </View>
             </Card>
 
-            <Card style={{width: '49%', height: 200, paddingTop: 10, marginTop: 10}}>
+            <Card style={[styles.cardStyle]}>
                     <View style={{alignItems: 'center', padding: 10}}>
                         <Image source={require('../assets/recipe2.png')}/>
                     </View>
@@ -122,7 +125,7 @@ class HomeScreen extends React.Component {
     </View>
 
     <View style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
-            <Card style={{width: '49%', height: 200, paddingTop: 10, marginTop: 10}}>
+            <Card style={[styles.cardStyle]}>   
 
                     <View style={{alignItems: 'center', padding: 10}}>
                         <Image source={require('../assets/recipe3.png')}/>
@@ -133,7 +136,7 @@ class HomeScreen extends React.Component {
                     </View>
             </Card>
 
-            <Card style={{width: '49%', height: 200, paddingTop: 10, marginTop: 10}}>
+            <Card style={[styles.cardStyle]}>
                     <View style={{alignItems: 'center', padding: 10}}>
                         <Image source={require('../assets/recipe4.png')}/>
                     </View>
@@ -198,6 +201,14 @@ const styles = StyleSheet.create({
     color: '#EB6C3E',
   },
 
+  text_section:
+  {
+      color: '#524D4C',
+      fontWeight: 'bold',
+      fontSize: 24,
+      marginTop: 20,
+  },
+
   bmiText:
   {
     fontSize: 16,  
@@ -210,6 +221,13 @@ const styles = StyleSheet.create({
     paddingRight: '75%',
     color: 'red',
     fontSize: 20,
+  },
+
+  cardStyle:
+  {
+    width: '49%', 
+    height: 180, 
+    marginTop: 10
   },
 
   roundButton1: {
