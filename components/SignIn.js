@@ -95,7 +95,11 @@ googleSignUp = () =>
       <View style={styles.container}>
         
           <View style={styles.header}>
-            <Image source={require('../assets/logo.png')}/>
+            {/* <Image source={require('../assets/logo.png')}/> */}
+            <Image
+            style={{ width: 100, height: 100,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
+            source={require('./logo.png')}
+          />
             <Text style={styles.titleText}>
               Login Here!
             </Text>

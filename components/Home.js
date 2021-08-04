@@ -226,6 +226,7 @@ const styles = StyleSheet.create({
 
   topCardStyle:
   {
+    marginTop: 30,
     width: deviceWidth-25,
     backgroundColor: "#fff",
     height: 40,
