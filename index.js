@@ -10,6 +10,7 @@ import adminCategory from './components/admin/Category';
 import adminProductList from './components/admin/ProductList';
 import adminProduct from './components/admin/Product';
 import UserDetail from './components/UserDetail';
+import HomeScreen from './components/HomeScreen';
 
 const Navigator = createStackNavigator({
   
@@ -21,7 +22,8 @@ const Navigator = createStackNavigator({
   adminCategory: { screen: adminCategory },
   adminProductList: { screen: adminProductList },
   adminProduct: { screen: adminProduct },
-  UserDetail: { screen: UserDetail}
+  UserDetail: { screen: UserDetail},
+  HomeScreen: {screen: HomeScreen},
 },
 
 {

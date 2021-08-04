@@ -22,5 +22,22 @@ router.route('/add').post((req,res) => {
         .catch(err => res.status(400).json('Error:' + err));
 });
 
+router.route('/getbmiByUserId').get((req,res) => {
+
+    const userId = req.query.userId;
+    console.log(userId)
+    const filter = {
+      userId: userId,
+    };
+    UserInfo.find(filter)
+      .then((carts) => {
+        if (carts.length > 0) res.json(carts[0]);
+        else {
+          res.json({});
+        }
+      })
+      .catch((err) => res.status(400).json("Error:" + err));
+
+});
 
 module.exports = router

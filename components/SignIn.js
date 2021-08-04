@@ -35,7 +35,7 @@ class SignIn extends React.Component {
         {
           const navigateAction = StackActions.reset({
             index: 0,
-            actions: [NavigationActions.navigate({ routeName: "Home" })],
+            actions: [NavigationActions.navigate({ routeName: "HomeScreen" })],
           });
           this.props.navigation.dispatch(navigateAction);
         }

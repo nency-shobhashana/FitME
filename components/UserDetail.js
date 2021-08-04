@@ -36,7 +36,7 @@ class UserDetail extends React.Component {
         date: this.state.date,
         height: this.state.height,
         weight: this.state.weight,
-        userId: uid,
+        userId: firebaseApp.auth().currentUser.uid,
       })
       .then(res => {
         alert("User data added succesfully");

@@ -28,9 +28,9 @@ const UserInfoSchema = new Schema({
         required: true
     },
     
-    userid:
+    userId:
     {
-        type: String
+        type: String,
     },
 
     bmi:
