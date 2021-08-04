@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
-import Drawers from './components/admin/Drawers';
+import {Drawers} from './components/admin/Drawers';
 import adminCategoryList from './components/admin/CategoryList';
 import adminCategory from './components/admin/Category';
 import adminProductList from './components/admin/ProductList';
@@ -15,13 +15,15 @@ import Chat from './components/Chat';
 import Progress from './components/Progress';
 import Plan from './components/Plan';
 import Me from './components/Me';
+import ReceipeScreen from './components/ReceipeScreen';
+
 
 const Navigator = createStackNavigator({
   
   SignIn: { screen: SignIn },
   SignUp: { screen: SignUp },
   Home: { screen: HomeScreen, navigationOptions: {headerShown: false}  },
-  Dashboard: { screen: Drawers, navigationOptions: {headerShown: false}},
+  AdminDashboard: { screen: Drawers},
   adminCategoryList: { screen: adminCategoryList },
   adminCategory: { screen: adminCategory },
   adminProductList: { screen: adminProductList },
@@ -31,6 +33,7 @@ const Navigator = createStackNavigator({
   Progress: { screen: Progress},
   Plan: { screen: Plan},
   Me: { screen: Me},
+  ReceipeScreen: { screen: ReceipeScreen},
 },
 
 {

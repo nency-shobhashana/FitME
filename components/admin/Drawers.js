@@ -1,25 +1,35 @@
 import React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
 import Dashboard from './Dashboard';
-// import CategoryList from './CategoryList';
-import Category from './Category';
-import Product from './Product';
+import CategoryList from './CategoryList';
+import ProductList from './ProductList';
 
-export default function Drawers() {
+export const Drawers = createDrawerNavigator({
+  Dashboard: { screen: Dashboard },
+  Category: { screen: CategoryList },
+  Product: { screen: ProductList },
 
-    const Drawer = createDrawerNavigator();
+}, {
+  initialRouteName: 'Dashboard',
+  navigationOptions: ({ navigation }) => ({
+    initialRouteName: 'MainScreen',
+    headerMode: 'screen',
+    headerTitle: 'Main Screen Header',
+    drawerLabel: 'Main Screen',
+  }),
+});
 
-    return (
-        <NavigationContainer>
-            <Drawer.Navigator initialRouteName="Dashboard">
-              <Drawer.Screen name="Dashboard" component={Dashboard} />
-              {/* <Drawer.Screen name="CategoryList" component={CategoryList} /> */}
-              <Drawer.Screen name="Category" component={Category} />
-              <Drawer.Screen name="Product" component={Product} />
-            </Drawer.Navigator>
-        </NavigationContainer>
+// export default function Drawers() {
 
-    );
-}
+
+
+//   return (
+//     <Drawer.Navigator initialRouteName="Dashboard">
+//       <Drawer.Screen name="Dashboard" component={Dashboard} />
+//       <Drawer.Screen name="Category" component={CategoryList} />
+//       <Drawer.Screen name="Product" component={Product} />
+//     </Drawer.Navigator>
+
+//   );
+// }

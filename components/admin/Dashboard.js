@@ -2,9 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from 'react-native';
 import {firebaseApp} from '../../firebase-config';
-import { StackActions, NavigationActions } from 'react-navigation'; 
-import { createStackNavigator } from "react-navigation-stack";
-import { NavigationContainer } from "@react-navigation/native";
+
 
 
 class Dashboard extends React.Component {

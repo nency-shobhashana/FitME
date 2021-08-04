@@ -1,52 +1,101 @@
 import * as React from 'react';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
-import { SafeAreaView, ScrollView, useWindowDimensions, StyleSheet, Text, TouchableOpacity, View, Image, TextInput, Button } from 'react-native';
+import { SafeAreaView, ScrollView, FlatList, useWindowDimensions, StyleSheet, Text, TouchableOpacity, View, Image, TextInput, Button } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import {firebaseApp} from '../firebase-config'; 
-import Receipe from './Receipe';
-
-const PlanRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#FFF'}}>
-  	<Text>MealPlan</Text>
-  </View>
-);
-
- 
-export default function dietReceipe(props) {
+import {HOST_URL} from '../commonConfig'
+import axios from 'axios';
+class Plan extends React.Component {
   
-  const layout = useWindowDimensions();
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-  { key: 'ReceipeVeg', title: 'Veg' },
-  { key: 'ReceipeNonVeg', title: 'NonVeg' },
-  { key: 'ReceipeKeto', title: 'Keto' },
-  { key: 'ReceipeVegan', title: 'Vegan' },
-  ]);
- 
-  const renderScene = SceneMap({
-    ReceipeVeg: () => <Receipe {...props} receipeType='Veg'/>,
-    ReceipeNonVeg: () => <Receipe {...props} receipeType='NonVeg'/>,
-    ReceipeKeto: () => <Receipe {...props} receipeType='Keto'/>,
-    ReceipeVegan: () => <Receipe {...props} receipeType='Vegan'/>,
-  });
- 
-  const renderTabBar = props => (
-  	<TabBar
-     	 {...props}
-      	activeColor={'#75C34D'}
-      	inactiveColor={'black'}
-          style={{backgroundColor:'#FFF', fontWeight: 'bold' }}
-  	/>
-  );
+  state = { categories: ''}
 
- 
-  return (
-  	<TabView
-      	navigationState={{ index, routes }}
-      	renderScene={renderScene}
-      	renderTabBar={renderTabBar}
-      	onIndexChange={setIndex}
-      	initialLayout={{ width: layout.width }}
-  	/>
-  );
+  initCategory() {
+    console.log("initCategory")
+    
+    axios.get(HOST_URL + 'category')
+      .then(res => {
+        this.setState({categories: res.data})
+      });
+  }
+
+  componentDidMount(){
+    this.initCategory()
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <SafeAreaView>
+          <FlatList
+          data={this.state.categories}
+          extraData={this.state}
+          renderItem={({item}) => (
+              <TouchableOpacity style={styles.item} onPress={() => 
+              this.props.navigation.navigate('ReceipeScreen', {categoryId: item._id})}>
+                <View style={styles.imageView}>
+                  <Image
+                    style={styles.image}
+                    source={{
+                      uri: item.image,
+                    }}
+                  />
+                </View>
+                <Text style={styles.itemText}>{item.name}</Text>
+                {/* <Text style={styles.productCount}>{item.count}</Text> */}
+                <AntDesign style={styles.rightIcon} name="caretright" size={24} color="black" />
+              </TouchableOpacity>
+          )}/>
+        </SafeAreaView>
+      </View>
+    );
+  }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    
+  },
+  item: {
+    padding: 12,
+    borderColor: '#000',
+    // backgroundColor: '#e2ffd4',
+    borderBottomWidth: 1,
+    borderRadius: 5,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  itemText: {
+    marginLeft: 10,
+    marginTop: 3,
+    flexGrow: 2,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  imageView: {
+    display: 'flex',
+    width: 80, 
+    height: 80,
+    padding: 10,
+    borderRadius: 100,
+    borderWidth: 2,
+    borderColor: 'tomato',
+    backgroundColor: '#FFF',
+  },
+  image: {
+    flexGrow: 1,
+    resizeMode: 'center'
+  },
+  productCount: {
+    flexShrink:1,
+    marginRight: 20,
+  },
+  rightIcon:{
+    flexShrink:1,
+    color: '#75c34d',
+  }
+
+});
+
+export default Plan;

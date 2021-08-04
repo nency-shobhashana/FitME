@@ -15,7 +15,8 @@ export default class Product extends Component {
       categoryId: '',
       productDescription: '',
       productIngredients: '',
-      categories:[]
+      categories:[],
+      receipeTypes:["Veg", "NonVeg", "Kito", "Vegan"]
     }
   }
 
@@ -31,6 +32,7 @@ export default class Product extends Component {
               productId: res.data._id,
               productName: res.data.name,
               categoryId: res.data.category,
+              receipeType: res.data.receipeType,
               productDescription: res.data.details,
               productIngredients: res.data.ingredients,
               categories: catRes.data,
@@ -62,6 +64,7 @@ export default class Product extends Component {
   onSubmit = async () => {
     var product = {
       productName: this.state.productName,
+      receipeType: this.state.receipeType,
       categoryId: this.state.categoryId,
       productDescription: this.state.productDescription,
       productIngredients: this.state.productIngredients
@@ -116,6 +119,18 @@ export default class Product extends Component {
                 {
                   this.state.categories.map((val) => {
                     return (<Picker.Item key={val._id} label={val.name} value={val._id} />)
+                  })
+                }
+            </Picker>
+
+            <Picker style={styles.TextInput} 
+              selectedValue={this.state.receipeType}
+              onValueChange={(itemValue, itemIndex) =>
+                this.updateInputVal(itemValue, 'receipeType')
+              }>
+                {
+                  this.state.receipeTypes.map((val) => {
+                    return (<Picker.Item key={val} label={val} value={val} />)
                   })
                 }
             </Picker>

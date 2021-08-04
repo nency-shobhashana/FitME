@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from 'react-native';
+import { SafeAreaView, ScrollView, FlatList, StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import {firebaseApp} from '../firebase-config';
 import axios from "axios";
@@ -9,17 +9,99 @@ import { StackActions, NavigationActions } from 'react-navigation';
 
 
 class Receipe extends React.Component {
-  
-  render()
-  {
+
+  state = { products: "" };
+
+  initCategory() {
+    console.log("initProducts");
+
+    const catId = this.props.navigation.getParam("categoryId");
+    const searchText = this.props.navigation.getParam("searchText");
+    let displayProducts;
+
+    
+    let productNames = [];
+
+    let url = HOST_URL + "product";
+    if (catId != null && catId != undefined && catId != "") {
+      url = url + "?categoryId=" + catId + "&receipeType="+ this.props.receipeType;
+
+      axios.get(url).then((res) => {
+        this.setState({ products: res.data });
+      });
+
+    }
+    else if (searchText != null && searchText != undefined)
+    {
+      var self = this;
+      console.log("search else if **************");
+      let searchlist = [];
+      let pName;
+      let searchtext = searchText.toLowerCase();
+     
+      axios.get(url).then((res) => {
+        res.data.forEach(element => {
+          pName = element.name.toLowerCase();
+          if (((searchText.toLowerCase()).includes(pName)) || (pName.includes(searchText.toLowerCase()))) {
+            console.log(pName, searchText.toLowerCase());
+            url = HOST_URL + "product/search?searchText=" + element.name;
+            console.log(url);
+            axios.get(url).then((res) => {
+              searchlist.push(res.data[0]);
+            
+            });
+          }
+        });
+      }).then(()=>
+      {
+        self.setState({ products: searchlist });
+      });
+      
+    }
+
+  }
+
+  componentDidMount() {
+    this.initCategory();
+  }
+
+  render() {
     return (
-    <ScrollView>
       <View style={styles.container}>
-        <Text>Welcome to {this.props.receipeType} Meal Plan</Text>
+        <SafeAreaView>
+          <FlatList
+            columnWrapperStyle={{ justifyContent: "space-evenly" }}
+            data={this.state.products}
+            numColumns={2}
+            extraData={this.state}
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity
+                  style={styles.item}
+                  onPress={() =>
+                    this.props.navigation.navigate("ProductDetail", {
+                      productId: item._id,
+                    })
+                  }
+                >
+                  <View style={styles.imageView}>
+                    <Image
+                      style={styles.image}
+                      source={{
+                        uri: item.image,
+                      }}
+                    />
+                  </View>
+                  <Text style={styles.itemText}>{item.name}</Text>
+                </TouchableOpacity>
+              );
+            }}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </SafeAreaView>
       </View>
-    </ScrollView>
-  );
-  }  
+    );
+  } 
 }
 
 
@@ -158,7 +240,42 @@ const styles = StyleSheet.create({
     borderColor: '#EB6C3E',
     borderWidth: 1,
     backgroundColor: '#EB6C3E',
-  }
+  },
+  item: {
+    width: "46%",
+    padding: 10,
+    marginVertical: 8,
+    borderColor: "#000",
+    borderWidth: 1,
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  itemText: {
+    textAlign: "center",
+    marginTop: 5,
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  itemPrice: {
+    textAlign: "center",
+    marginTop: 5,
+    marginBottom: 5,
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  imageView: {
+    display: "flex",
+    width: 120,
+    height: 120,
+    padding: 10,
+    borderWidth: 2,
+    borderColor: "tomato",
+    backgroundColor: "#FFF",
+  },
+  image: {
+    flexGrow: 1,
+    resizeMode: "center",
+  },
 });
 
 export default Receipe;
