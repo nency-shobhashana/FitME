@@ -93,7 +93,7 @@ class Home extends React.Component {
                 </View>
             </View>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <TouchableOpacity style={styles.roundButton1}>
+                <TouchableOpacity style={styles.roundButton1} onPress={()=>{this.props.navigation.navigate('Bmi')}}>
                     <Text style={styles.roundBtnText}>+</Text>
                 </TouchableOpacity>
             </View>

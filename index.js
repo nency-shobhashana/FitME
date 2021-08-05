@@ -19,6 +19,7 @@ import Plan from './components/Plan';
 import Me from './components/Me';
 import ReceipeScreen from './components/ReceipeScreen';
 import ProductDetail from './components/ProductDetail';
+import Bmi from './components/Bmi';
 
 
 const Navigator = createStackNavigator({
@@ -26,6 +27,7 @@ const Navigator = createStackNavigator({
   SignIn: { screen: SignIn },
   SignUp: { screen: SignUp },
   Home: { screen: HomeScreen, navigationOptions: {headerShown: false}  },
+  Bmi : { screen: Bmi},
   Dashboard: { screen: Drawers, navigationOptions: {headerShown: false}},
   adminCategoryList: { screen: adminCategoryList },
   adminCategory: { screen: adminCategory },
