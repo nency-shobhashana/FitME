@@ -80,7 +80,7 @@ class Home extends React.Component {
                 <Text style={styles.bmiText}>Your Current BMI is {this.state.currentBmi}</Text>
             </View>
             
-            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: 20 }}>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', padding: 20 }}>
 
                 <Image
                 style={{ width: 50, height: 50,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}

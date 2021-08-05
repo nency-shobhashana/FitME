@@ -2,10 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput} from 'react-native';
 import {Picker} from "@react-native-picker/picker";
-import DatePicker from 'react-native-datepicker';
 import axios from "axios";
 import {firebaseApp} from '../firebase-config'; 
-import { HOST_URL } from '../commonConfig'
+import { HOST_URL } from '../commonConfig';
+import DatePicker from 'react-native-datepicker';
 
 
 class UserDetail extends React.Component {
@@ -40,7 +40,7 @@ class UserDetail extends React.Component {
       })
       .then(res => {
         alert("User data added succesfully");
-        this.props.navigation.navigate('SignIn')
+        this.props.navigation.navigate('Home')
       }).catch(error =>{
         console.log(error);
       })   
@@ -79,7 +79,7 @@ class UserDetail extends React.Component {
           </Picker>
 
 
-          <Text style={[styles.text_footer, { margin: 10 }, {marginTop: 30}, { fontSize: 15 }]}>Enter the Date of Birth</Text>
+    <Text style={[styles.text_footer, { margin: 10 }, {marginTop: 30}, { fontSize: 15 }]}>Enter the Date of Birth</Text>
 
           <DatePicker
           style={styles.datePickerStyle}
@@ -108,6 +108,9 @@ class UserDetail extends React.Component {
           }}
           />
 
+          {/* <TextInput style={styles.resultText} placeholder = "MM-DD-YYYY" onChangeText={date => this.setState({ date })} value={this.state.date} /> */}
+
+
           <Text style={[styles.text_section, { marginTop: 70 }, {marginLeft: 10}, {marginBottom: 20}, { fontSize: 21 }]}>Where Are We Now?</Text>
 
           <View style={styles.footer}>
@@ -117,7 +120,7 @@ class UserDetail extends React.Component {
                   <Text style={[styles.text_footer, { margin: 10 }, { fontSize: 15 }]}>Enter the Weight</Text>
                   <TextInput style={styles.resultText} placeholder="Weight in kg" onChangeText={weight => this.setState({ weight })} value={this.state.weight} />
 
-                  <Text style={[styles.text_section, { margin: 10}, { fontSize: 15 }]}>Your BMI is</Text>
+                  {/* <Text style={[styles.text_section, { margin: 10}, { fontSize: 15 }]}>Your BMI is</Text> */}
 
                   <View style={styles.submitbutton}>
                     <TouchableOpacity style={[styles.submit, {color: 'black'}]} onPress={() => this.addData()}>
