@@ -46,7 +46,7 @@ export default class Product extends Component {
       <View style={styles.container}>
         <View style={styles.signUpbutton}>
             <TouchableOpacity style={[styles.signUp]} onPress={()=>{this.props.navigation.navigate('adminProduct')}}>
-                <Text style={[styles.signbtnText, {textAlign: 'center'}]} >Add New Product</Text>
+                <Text style={[styles.signbtnText, {textAlign: 'center'}]} >Add New Recipe</Text>
             </TouchableOpacity>
         </View>
         <SafeAreaView>

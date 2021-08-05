@@ -94,7 +94,6 @@ export default class Category extends Component {
               </View>
           )}/>
         </SafeAreaView>
-        <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('adminProductList')}}>Go to Product List</Text>
       </View>
     )
   }

@@ -39,6 +39,7 @@ class Bmi extends React.Component {
         axios.put(HOST_URL + "userInfo?userId=" + userId, user)
         .then(res => {
             self.setState({ weight: res.data.weight});
+            this.props.navigation.navigate('Home');
         }).catch(function (error) {
           console.log("error", error);
         })
