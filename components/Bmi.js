@@ -15,14 +15,14 @@ class Bmi extends React.Component {
 
   addData = () =>
   {
-    
+    var self = this;
     const user = {
         firstname: this.state.firstname,
         gender: this.state.gender,
         date: this.state.date,
         height: this.state.height,
         weight: this.state.weight,
-        bmi: this.state.bmi
+        bmi: this.calcBmi(),
       }
 
       console.log("vgfgfu");
@@ -30,15 +30,16 @@ class Bmi extends React.Component {
       axios.post(HOST_URL + "userBmi/add", {
         height: this.state.height,
         weight: this.state.weight,
-        date: new Date().getMonth()/new Date().getDate()/new Date().getFullYear(),
-        userId: userId
+        date: new Date().getDate(),
+        userId: userId,
+        bmi: this.calcBmi(),
       })
       .then(res => {
         alert("User data added succesfully");
         
         axios.put(HOST_URL + "userInfo?userId=" + userId, user)
         .then(res => {
-            self.setState({ weight: res.data.weight});
+            self.setState({ weight: this.state.weight, bmi: this.state.bmi});
             this.props.navigation.navigate('Home');
         }).catch(function (error) {
           console.log("error", error);
@@ -48,6 +49,14 @@ class Bmi extends React.Component {
       })   
  }
 
+ calcBmi = () =>
+ {
+    const hei = parseFloat(this.state.height);
+    const wei = parseFloat(this.state.weight);
+    this.state.bmi = wei / (hei * hei);
+    return this.state.bmi; 
+    
+ }
 
  componentDidMount() 
 {

@@ -9,9 +9,10 @@ router.route('/add').post((req,res) => {
     const weight = req.body.weight;
     const date = req.body.date;
     const userId = req.body.userId;
-    hei = parseFloat(req.body.height);
-    wei = parseFloat(req.body.weight);
-    const bmi = wei / (hei * hei);
+    const bmi = req.body.bmi;
+    // hei = parseFloat(req.body.height);
+    // wei = parseFloat(req.body.weight);
+    // const bmi = wei / (hei * hei);
 
     console.log(height);
 

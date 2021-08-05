@@ -45,10 +45,12 @@ router.route('/getbmiByUserId').get((req,res) => {
 router.route('/').put((req,res) => {
   const userid =  req.query.userid;
   const weight = req.body.weight;
+  const bmi = req.body.bmi;
   
   console.log(userid);
   console.log(weight);
-    UserInfo.updateOne({userid: userid} , {weight: weight}, 
+  console.log(bmi);
+    UserInfo.updateOne({userid: userid} , {weight: weight, bmi: bmi}, 
           function(err, numberAffected, rawResponse) {
           //handle it
        })
