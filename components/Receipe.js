@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
-import { SafeAreaView, ScrollView, FlatList, StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from 'react-native';
+import { SafeAreaView, ScrollView, FlatList, StyleSheet, Text, TouchableOpacity, View, Image,Dimensions, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import {firebaseApp} from '../firebase-config';
 import axios from "axios";
@@ -77,7 +77,7 @@ class Receipe extends React.Component {
             renderItem={({ item }) => {
               return (
                 <TouchableOpacity
-                  style={styles.item}
+                  style={styles.recipeCardStyle}
                   onPress={() =>
                     this.props.navigation.navigate("ProductDetail", {
                       productId: item._id,
@@ -104,12 +104,10 @@ class Receipe extends React.Component {
   } 
 }
 
-
+const deviceWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
     flex: 1,
-    paddingTop: 50,
   },
 
   header: {
@@ -130,6 +128,25 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
   },
 
+  recipeCardStyle:
+  {
+    margin: 5,
+    marginTop: 8,
+    width: ((deviceWidth-25)/2)-10,
+    backgroundColor: "#fff",
+    height: 180,
+    borderRadius: 6,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 5,
+      height: 5
+    },
+    shadowOpacity: 0.25,
+    elevation: 9,
+    shadowRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   
 
   titleText:

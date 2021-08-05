@@ -18,6 +18,7 @@ import Progress from './components/Progress';
 import Plan from './components/Plan';
 import Me from './components/Me';
 import ReceipeScreen from './components/ReceipeScreen';
+import ProductDetail from './components/ProductDetail';
 
 
 const Navigator = createStackNavigator({
@@ -25,7 +26,7 @@ const Navigator = createStackNavigator({
   SignIn: { screen: SignIn },
   SignUp: { screen: SignUp },
   Home: { screen: HomeScreen, navigationOptions: {headerShown: false}  },
-  Dashboard: { screen: Drawers},
+  Dashboard: { screen: Drawers, navigationOptions: {headerShown: false}},
   adminCategoryList: { screen: adminCategoryList },
   adminCategory: { screen: adminCategory },
   adminProductList: { screen: adminProductList },
@@ -38,6 +39,7 @@ const Navigator = createStackNavigator({
   Plan: { screen: Plan},
   Me: { screen: Me},
   ReceipeScreen: { screen: ReceipeScreen},
+  ProductDetail: { screen: ProductDetail },
 },
 
 {
