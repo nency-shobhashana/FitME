@@ -42,14 +42,14 @@ class Home extends React.Component {
         const userId = firebaseApp.auth().currentUser.uid;
         axios.get(HOST_URL + "userInfo/getbmiByUserId?userId=" + userId)
         .then(res => {
-            self.setState({ currentBmi: parseInt(res.data.bmi) });
+            self.setState({ currentBmi: parseInt(res.data.bmi)});
         }).catch(function (error) {
           console.log("error", error);
         })
     }
   });
-
   }
+
 
   fetchRecipe = () =>
   {

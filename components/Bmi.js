@@ -13,38 +13,30 @@ class Bmi extends React.Component {
     this.state = {height: '', weight: '', date: '', bmi: '', currentDate: new Date().getDate(),isLoading: false, error: ''}
   }
 
-//   addData = () =>
-//   {
-//       console.log("vgfgfu");
-//       axios.post(HOST_URL + "userBmi/add", {
-//         height: this.state.height,
-//         weight: this.state.weight,
-//         date: new Date().getMonth()/new Date().getDate()/new Date().getFullYear(),
-//         userId: firebaseApp.auth().currentUser.uid,
-//       })
-//       .then(res => {
-//         alert("User data added succesfully");
-//         this.props.navigation.navigate('Home')
-//       }).catch(error =>{
-//         console.log(error);
-//       })   
-//  }
-
-
   addData = () =>
   {
+    
+    const user = {
+        firstname: this.state.firstname,
+        gender: this.state.gender,
+        date: this.state.date,
+        height: this.state.height,
+        weight: this.state.weight,
+        bmi: this.state.bmi
+      }
+
       console.log("vgfgfu");
       const userId = firebaseApp.auth().currentUser.uid
       axios.post(HOST_URL + "userBmi/add", {
         height: this.state.height,
         weight: this.state.weight,
         date: new Date().getMonth()/new Date().getDate()/new Date().getFullYear(),
-        userId: userId,
+        userId: userId
       })
       .then(res => {
         alert("User data added succesfully");
         
-        axios.get(HOST_URL + "userInfo/getbmiByUserId?userId=" + userId)
+        axios.put(HOST_URL + "userInfo?userId=" + userId, user)
         .then(res => {
             self.setState({ weight: res.data.weight});
         }).catch(function (error) {
@@ -55,34 +47,6 @@ class Bmi extends React.Component {
       })   
  }
 
- updateUser() 
- {
-
-  const uid = firebaseApp.auth().currentUser.uid;
-  console.log(uid);
-
-  const user = {
-    firstname: this.state.firstname,
-    lastname: this.state.lastname,
-    email: this.state.email,
-    contact: this.state.contact,
-    address: this.state.address,
-  }
-
-  axios.put(HOST_URL + "profile?userid=" + uid, user)
-    .then(res => {
-      console.log(res.data)
-      this.setState({
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
-        email: this.state.email,
-        contact: this.state.contact,
-        address: this.state.address,
-      })
-    }).then(() =>{
-      alert("User updated succesfully");
-    })
-}
 
  componentDidMount() 
 {

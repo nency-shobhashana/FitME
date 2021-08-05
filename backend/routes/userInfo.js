@@ -22,6 +22,7 @@ router.route('/add').post((req,res) => {
         .catch(err => res.status(400).json('Error:' + err));
 });
 
+
 router.route('/getbmiByUserId').get((req,res) => {
 
     const userId = req.query.userId;
@@ -38,6 +39,21 @@ router.route('/getbmiByUserId').get((req,res) => {
       })
       .catch((err) => res.status(400).json("Error:" + err));
 
+});
+
+
+router.route('/').put((req,res) => {
+  const userid =  req.query.userid;
+  const weight = req.body.weight;
+  
+  console.log(userid);
+  console.log(weight);
+    UserInfo.updateOne({userid: userid} , {weight: weight}, 
+          function(err, numberAffected, rawResponse) {
+          //handle it
+       })
+      .then(() => res.json('User updated'))
+      .catch(err => res.status(400).json('Error:' + err));
 });
 
 module.exports = router

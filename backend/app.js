@@ -16,6 +16,7 @@ const authRoute = require('./routes/auth');
 const categoryRoute = require('./routes/category');
 const productRoute = require('./routes/product');
 const userRoute = require('./routes/userInfo');
+const bmiRoute = require('./routes/bmi');
 
 //Routes
 app.get('/', (req, res) => {
@@ -32,6 +33,7 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, (err) =>{
     }
     app.use('/user', authRoute);
     app.use('/userInfo', userRoute);
+    app.use('/userBmi', bmiRoute);
     app.use('/category', categoryRoute);
     app.use('/product', productRoute);
 })
