@@ -34,3 +34,4 @@ const BmiSchema = new Schema({
 
 const Bmi = mongoose.model('Bmi', BmiSchema)
 module.exports = Bmi
+
