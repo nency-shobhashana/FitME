@@ -111,7 +111,11 @@ googleSignUp = () =>
       <View style={styles.container}>
         
           <View style={styles.header}>
-            <Image source={require('../assets/logo.png')}/>
+            {/* <Image source={require('../assets/logo.png')}/> */}
+            <Image
+            style={{ width: 100, height: 100,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
+            source={require('./logo.png')}
+            />
             <Text style={styles.titleText}>
               Create an Account Here!
             </Text>
@@ -146,32 +150,6 @@ googleSignUp = () =>
                   />
                   <TextInput style={styles.TextInput} placeholder="Enter your Password" secureTextEntry={true} value={this.state.password} onChangeText={(val) => this.updateInputVal(val, 'password')}></TextInput>
               </View>
-
-              {/* First name */}
-
-              {/* <Text style={[styles.text_footer, {marginTop: 40}]}>First Name</Text>
-              <View style={styles.action}>
-                  <AntDesign 
-                  name = 'user'
-                  size = {20}
-                  color = 'grey'
-                  style = {styles.inputIcon}
-                  />
-                  <TextInput style={styles.TextInput} placeholder="First Name" value={this.state.firstname} onChangeText={(val) => this.updateInputVal(val, 'firstname')}></TextInput>
-              </View> */}
-
-              {/* Last name */}
-
-              {/* <Text style={[styles.text_footer, {marginTop: 40}]}>Last Name</Text>
-              <View style={styles.action}>
-                  <AntDesign 
-                  name="user"
-                  size = {20}
-                  color = 'grey'
-                  style = {styles.inputIcon}
-                  />
-                  <TextInput style={styles.TextInput} placeholder="Last Name" value={this.state.lastname} onChangeText={(val) => this.updateInputVal(val, 'lastname')}></TextInput>
-              </View> */}
 
               <View style={styles.signUpbutton}>
                   <TouchableOpacity style={[styles.signUp, {color: 'black'}]} onPress={() => this.registerUser()}>

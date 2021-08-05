@@ -82,7 +82,10 @@ class Home extends React.Component {
             
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: 20 }}>
 
-                <Image source={require('../assets/clock.png')}/>
+                <Image
+                style={{ width: 50, height: 50,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
+                source={require('./clock.png')}
+                />
 
                 <View style={{alignItems: 'center', padding: 10}}>
                     <Text style={{ fontWeight: 'bold', marginBottom: 10, fontSize: 15}}>“The Groundwork 
@@ -102,7 +105,10 @@ class Home extends React.Component {
 
           <View style ={styles.recipeCardStyle}>
               <View style={{alignItems: 'center', padding: 10}}>
-                  <Image source={require('../assets/recipe1.png')}/>
+              <Image
+                style={{ width: 155, height: 116,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
+                source={require('./recipe1.png')}
+                />
               </View>
 
               <View style={{alignItems: 'center', padding: 10}}>
@@ -113,7 +119,10 @@ class Home extends React.Component {
 
           <View style ={styles.recipeCardStyle}>
               <View style={{alignItems: 'center', padding: 10}}>
-                    <Image source={require('../assets/recipe2.png')}/>
+                <Image
+                  style={{ width: 155, height: 116,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
+                  source={require('./recipe2.png')}
+                  />
               </View>
 
               <View style={{alignItems: 'center', padding: 10}}>
@@ -128,22 +137,28 @@ class Home extends React.Component {
 
           <View style ={styles.recipeCardStyle}>
               <View style={{alignItems: 'center', padding: 10}}>
-                  <Image source={require('../assets/recipe1.png')}/>
+                <Image
+                  style={{ width: 155, height: 116,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
+                  source={require('./recipe3.png')}
+                  />
               </View>
 
               <View style={{alignItems: 'center', padding: 10}}>
-                  <Text style={{marginBottom: 10, fontSize: 20, color: '#000'}}>Tacos Dishes</Text> 
+                  <Text style={{marginBottom: 10, fontSize: 20, color: '#000'}}>Keto Dishes</Text> 
               </View>
           </View>
 
 
           <View style ={styles.recipeCardStyle}>
               <View style={{alignItems: 'center', padding: 10}}>
-                    <Image source={require('../assets/recipe2.png')}/>
+                <Image
+                  style={{ width: 155, height: 116,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
+                  source={require('./recipe4.png')}
+                  />
               </View>
 
               <View style={{alignItems: 'center', padding: 10}}>
-                    <Text style={{marginBottom: 10, fontSize: 20, color: '#000'}}>Salads</Text> 
+                    <Text style={{marginBottom: 10, fontSize: 20, color: '#000'}}>Rice Bowls</Text> 
               </View>
           </View>
       </View>

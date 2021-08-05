@@ -148,15 +148,6 @@ googleSignUp = () =>
               </View>
 
             <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('SignUp')}}>Register Here!</Text>
-            {/* <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{const navigateAction = StackActions.reset({
-                      index: 0,
-                      actions: [NavigationActions.navigate({ routeName: "Home" })],
-                    });
-                    this.props.navigation.dispatch(navigateAction);}}>Skip and Go to Home</Text> */}
-            <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('adminCategoryList')}}>Go to admin</Text>
-            <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('UserDetail')}}>User Details</Text>
-
-
         </View>
         
       </View>
