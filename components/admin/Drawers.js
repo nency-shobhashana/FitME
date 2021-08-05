@@ -1,35 +1,77 @@
 import React from 'react';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { Text, View, FlatList, TouchableOpacity, ImagePropTypes } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { createStackNavigator } from 'react-navigation-stack';
+
 
 import Dashboard from './Dashboard';
 import CategoryList from './CategoryList';
 import ProductList from './ProductList';
+import UserInfo from './UserInfo';
+import Profile from './Profile';
 
-export const Drawers = createDrawerNavigator({
-  Dashboard: { screen: Dashboard },
-  Category: { screen: CategoryList },
-  Product: { screen: ProductList },
-
-}, {
-  initialRouteName: 'Dashboard',
-  navigationOptions: ({ navigation }) => ({
-    initialRouteName: 'MainScreen',
-    headerMode: 'screen',
-    headerTitle: 'Main Screen Header',
-    drawerLabel: 'Main Screen',
-  }),
+const categoryStack = createStackNavigator({
+  CategoryList: CategoryList,
 });
 
-// export default function Drawers() {
+const productStack = createStackNavigator({
+  ProductList: ProductList,
+});
+
+const userInfoStack = createStackNavigator({
+  UserInfo: UserInfo,
+});
+
+const profileStack = createStackNavigator({
+  Profile: Profile,
+});
+
+const TabNavigator = createBottomTabNavigator({
+  Home: Dashboard,
+  Category: categoryStack,
+  Recipe: productStack,
+  UserInfo: userInfoStack,
+  Me: profileStack,
+},
+{
+  defaultNavigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused, horizontal, tintColor }) => {
+      const { routeName } = navigation.state;
+      let IconComponent = Ionicons;
+      let iconName;
+      if (routeName == 'Home') 
+      {
+        iconName = 'home';
+      } 
+      else if (routeName == 'Category') 
+      {
+        iconName = 'apps-sharp';
+      } 
+      else if (routeName == 'Recipe') 
+      {
+        iconName = 'ios-leaf-sharp';
+      } 
+      else if (routeName == 'UserInfo') 
+      {
+        iconName = 'ios-reader';
+      } 
+      else if (routeName == 'Me') 
+      {
+        iconName = 'person';
+      } 
 
 
+      return <IconComponent name={iconName} size={25} color={tintColor} />;
+    },
+  }),
+  initialRouteName:'Home',
+  tabBarOptions: {
+    activeTintColor: 'tomato',
+    inactiveTintColor: '#848180',
+  },
+}
+);
 
-//   return (
-//     <Drawer.Navigator initialRouteName="Dashboard">
-//       <Drawer.Screen name="Dashboard" component={Dashboard} />
-//       <Drawer.Screen name="Category" component={CategoryList} />
-//       <Drawer.Screen name="Product" component={Product} />
-//     </Drawer.Navigator>
-
-//   );
-// }
+export default createAppContainer(TabNavigator);

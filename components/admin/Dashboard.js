@@ -13,24 +13,16 @@ class Dashboard extends React.Component {
     this.state = {email: '', password: '',isLoading: false, error: ''}
   }
 
-  signOutUser = async () => 
-  {
+  signOutUser = async () => {
     var self = this;
     try {
-        await firebaseApp.auth().signOut();
-
-        // const navigateAction = StackActions.reset({
-        //   index: 0,
-        //   key: null,
-        //   actions: [NavigationActions.navigate({ routeName: 'SignIn' })],
-        // });
-        self.props.navigation.navigate('SignIn');
+      await firebaseApp.auth().signOut();
+      this.props.navigation.navigate('SignIn')
 
     } catch (e) {
-        console.log(e);
+      console.log(e);
     }
-
-}
+  }
   
   render()
   {

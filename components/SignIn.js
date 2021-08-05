@@ -44,7 +44,7 @@ class SignIn extends React.Component {
         {
           const navigateAction = StackActions.reset({
             index: 0,
-            actions: [NavigationActions.navigate({ routeName: "AdminDashboard" })],
+            actions: [NavigationActions.navigate({ routeName: "Dashboard" })],
           });
           this.props.navigation.dispatch(navigateAction);
         }

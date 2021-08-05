@@ -4,11 +4,13 @@ import { createStackNavigator } from 'react-navigation-stack';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
-import {Drawers} from './components/admin/Drawers';
+import Drawers from './components/admin/Drawers';
 import adminCategoryList from './components/admin/CategoryList';
 import adminCategory from './components/admin/Category';
 import adminProductList from './components/admin/ProductList';
 import adminProduct from './components/admin/Product';
+import adminUserInfo from './components/admin/UserInfo';
+import adminProfile from './components/admin/Profile';
 import UserDetail from './components/UserDetail';
 import HomeScreen from './components/HomeScreen';
 import Chat from './components/Chat';
@@ -23,11 +25,13 @@ const Navigator = createStackNavigator({
   SignIn: { screen: SignIn },
   SignUp: { screen: SignUp },
   Home: { screen: HomeScreen, navigationOptions: {headerShown: false}  },
-  AdminDashboard: { screen: Drawers},
+  Dashboard: { screen: Drawers},
   adminCategoryList: { screen: adminCategoryList },
   adminCategory: { screen: adminCategory },
   adminProductList: { screen: adminProductList },
   adminProduct: { screen: adminProduct },
+  adminUserInfo: { screen: adminUserInfo },
+  adminProfile: {screen: adminProfile},
   UserDetail: { screen: UserDetail},
   Chat: { screen: Chat},
   Progress: { screen: Progress},
