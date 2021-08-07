@@ -3,34 +3,17 @@ const Schema = mongoose.Schema
 
 const BmiSchema = new Schema({
 
-    height: {
-        type: String,
-        required: true
-    },
-
-    weight: 
+    details: 
     {
-        type: String,
-        required: true
-    },
-
-    date:
-    {
-        type: String
-    },
-
-    bmi:
-    {
-        type: String
-    },
-    
+        type: Array
+    },    
+   
     userId:
     {
         type: String
     },
 
-
-}, {timestamps: true} )
+})
 
 const Bmi = mongoose.model('Bmi', BmiSchema)
 module.exports = Bmi

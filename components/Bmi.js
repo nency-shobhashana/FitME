@@ -25,38 +25,41 @@ class Bmi extends React.Component {
         bmi: this.calcBmi(),
       }
 
-      console.log("vgfgfu");
       const userId = firebaseApp.auth().currentUser.uid
       axios.post(HOST_URL + "userBmi/add", {
         height: this.state.height,
         weight: this.state.weight,
-        date: new Date().getDate(),
+        date: new Date(),
         userId: userId,
         bmi: this.calcBmi(),
       })
       .then(res => {
         alert("User data added succesfully");
-        
-        axios.put(HOST_URL + "userInfo?userId=" + userId, user)
-        .then(res => {
-            self.setState({ weight: this.state.weight, bmi: this.state.bmi});
-            this.props.navigation.navigate('Home');
-        }).catch(function (error) {
-          console.log("error", error);
-        })
+        self.setState({ weight: this.state.weight, bmi: this.state.bmi});
+        this.props.navigation.navigate('Home');
+      //   axios.put(HOST_URL + "userInfo?userId=" + userId, user)
+      //   .then(res => {
+      //       self.setState({ weight: this.state.weight, bmi: this.state.bmi});
+      //       //this.props.navigation.navigate('Home');
+      //   }).then(res => {
+      //     this.props.navigation.navigate('Home');
+      // }).catch(function (error) {
+      //     console.log("error", error);
+      //   })
       }).catch(error =>{
         console.log(error);
       })   
  }
+
 
  calcBmi = () =>
  {
     const hei = parseFloat(this.state.height);
     const wei = parseFloat(this.state.weight);
     this.state.bmi = wei / (hei * hei);
-    return this.state.bmi; 
-    
+    return this.state.bmi;   
  }
+
 
  componentDidMount() 
 {
@@ -115,10 +118,11 @@ class Bmi extends React.Component {
 
 const deviceWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 10,
+  container: 
+  {
+      flex: 1,
+      backgroundColor: '#fff',
+      padding: 10,
   },
   resultText:
   {
@@ -138,12 +142,12 @@ const styles = StyleSheet.create({
   },
 
   submitbutton:
-   {
+  {
      alignItems: 'center',
      marginTop: '2%',
-   },
+  },
 
-   submit:
+  submit:
   {
     width: '100%',
     height: 50,

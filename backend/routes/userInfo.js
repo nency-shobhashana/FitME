@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 let UserInfo = require('../models/UserInfo');
+let Bmi = require('../models/Bmi');
 
 router.route('/add').post((req,res) => {
     const firstname = req.body.firstname;
@@ -14,10 +15,21 @@ router.route('/add').post((req,res) => {
     const bmi = wei / (hei * hei);
 
     const newUserInfo = new UserInfo({firstname, gender, date, height, weight, userId, bmi});
+    var bmiDetails = {
+        height,
+        weight,
+        date,
+        bmi
+    }
 
     newUserInfo.save()
         .then(() => {
-            res.json('User data Added.')
+            
+            const newBmi = new Bmi({details: [bmiDetails], userId});
+            newBmi.save()
+            .then(() => {
+              res.json('User data Added.')
+            })
         })
         .catch(err => res.status(400).json('Error:' + err));
 });

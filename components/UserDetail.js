@@ -27,7 +27,27 @@ class UserDetail extends React.Component {
       this.setState({ selectedcat: value });
     }
 
-    addData = () =>
+    // addData = () =>
+    // {
+    //   const uid = firebaseApp.auth().currentUser.uid;
+    //   axios.post(HOST_URL + "userInfo/add", {
+    //     firstname: this.state.firstname,
+    //     gender: this.state.selectedcat,
+    //     date: this.state.date,
+    //     height: this.state.height,
+    //     weight: this.state.weight,
+    //     userId: firebaseApp.auth().currentUser.uid,
+    //   })
+    //   .then(res => {
+    //     alert("User data added succesfully");
+    //     this.props.navigation.navigate('Home')
+    //   }).catch(error =>{
+    //     console.log(error);
+    //   })   
+
+    // }
+
+     addData = () =>
     {
       const uid = firebaseApp.auth().currentUser.uid;
       axios.post(HOST_URL + "userInfo/add", {
@@ -46,6 +66,15 @@ class UserDetail extends React.Component {
       })   
 
     }
+
+
+    calcBmi = () =>
+ {
+    const hei = parseFloat(this.state.height);
+    const wei = parseFloat(this.state.weight);
+    this.state.bmi = wei / (hei * hei);
+    return this.state.bmi;   
+ }
 
   
     render()
