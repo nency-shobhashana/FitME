@@ -59,11 +59,6 @@ class Home extends React.Component {
       });
   }
 
-  // componentDidMount() 
-  // {
-  //   this.fetchBmi();
-  //   this.fetchRecipe();
-  // }
   componentDidMount()
 {
   this.props.navigation.addListener('willFocus', () => {

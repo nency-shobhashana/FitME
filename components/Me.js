@@ -3,74 +3,50 @@ import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput, Dimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons'; 
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 import { StackActions, NavigationActions } from 'react-navigation'; 
 import {firebaseApp} from '../firebase-config';
 import axios from "axios";
-import { HOST_URL } from '../commonConfig'
+import { HOST_URL } from '../commonConfig';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-class SignUp extends React.Component   {
+class Me extends React.Component   {
 
   constructor() 
   {
     super();
-    this.state = { 
-      email: '', 
-      password: '',
-      isLoading: false
-    }
+    this.state = { name: '', date: '', gender: '', height: '', weight: '', bmi: ''};
   }
 
-  updateInputVal = (val, prop) => {
-    const state = this.state;
-    state[prop] = val;
-    this.setState(state);
-  }
 
-  registerUser = () => 
+  fetchData = () =>
   {
-    if(this.state.email === '' && this.state.password === '') 
+    var self = this;
+    firebaseApp.auth().onAuthStateChanged(function (user) {
+    if (user) 
     {
-      Alert.alert('Enter details to signup!')
-    }
-    else
-    {
-      this.setState({
-        isLoading: true,
-      })
-    }
-
-    firebaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then((res) => {
-        console.log(firebaseApp.auth().currentUser.uid);
-        const uid = firebaseApp.auth().currentUser.uid;
-       
-          axios.post(HOST_URL + "user/register",{
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            email: this.state.email,
-            password: this.state.password,
-            type: "user",
-            userid: firebaseApp.auth().currentUser.uid,
-          })
-          .then(() => {
-        alert('User registered successfully!')
-        this.setState({
-          isLoading: false,
-          email: '', 
-          password: '',
-          firstname: '',
-          lastname: '',
-        })
-        this.props.navigation.navigate('Login')
-      })
       
-    })
-      .catch(error =>{
-        console.log(error);
-      })      
-}
+        const userId = firebaseApp.auth().currentUser.uid;
+        axios.get(HOST_URL + "userInfo/getbmiByUserId?userId=" + userId)
+        .then(res => {
+            console.log(res.data.date);
+            self.setState({ name: res.data.firstname});
+            self.setState({ date: res.data.date});
+            self.setState({ gender: res.data.gender});
+            self.setState({ height: res.data.height});
+            self.setState({ weight: res.data.weight});
+            self.setState({ bmi: res.data.bmi});
+        }).catch(function (error) {
+          console.log("error", error);
+        })
+    }
+  });
+  }
 
+  componentDidMount() {
+    this.fetchData();
+  }
 
   render()
   {
@@ -111,7 +87,7 @@ class SignUp extends React.Component   {
               size={20} 
               color="grey" 
               style = {styles.inputIcon}/>
-                  <TextInput style={styles.TextInput} value={this.state.email} onChangeText={(val) => this.updateInputVal(val, 'email')}></TextInput>
+                  <TextInput style={styles.TextInput} onChangeText={name => this.setState({ name })} value={this.state.name}></TextInput>
               </View>
 
               {/* Date of birth */}
@@ -124,7 +100,7 @@ class SignUp extends React.Component   {
                   color = 'grey'
                   style = {styles.inputIcon}
                   />
-                  <TextInput style={styles.TextInput}secureTextEntry={true} value={this.state.password} onChangeText={(val) => this.updateInputVal(val, 'password')}></TextInput>
+                  <TextInput style={styles.TextInput} onChangeText={date => this.setState({ date })} value={this.state.date}></TextInput>
               </View>
 
               {/*  */}
@@ -137,29 +113,18 @@ class SignUp extends React.Component   {
                   color = 'grey'
                   style = {styles.inputIcon}
                   />
-                  <TextInput style={styles.TextInput} value={this.state.firstname} onChangeText={(val) => this.updateInputVal(val, 'firstname')}></TextInput>
+                  <TextInput style={styles.TextInput} onChangeText={gender => this.setState({ gender })} value={this.state.gender}></TextInput>
+
               </View>
 
               <View style ={styles.bottomCardStyle1}>
                 <View style={{ display: 'flex', flexDirection: 'row', padding: 20 }}>
                   <View style={{alignItems: 'center', padding: 10}}>
-                      <Image source={require('../assets/book.png')}/>
+                      <FontAwesome5 name="weight" size={30} color="white" />
                   </View>
 
                   <View style={{alignItems: 'center', padding: 10}}>
-                      <Text style={{marginBottom: 10, fontSize: 20, color: '#fff'}}>Learn more about it!</Text> 
-                  </View>
-                </View>
-              </View>
-
-              <View style ={styles.bottomCardStyle}>
-                <View style={{ display: 'flex', flexDirection: 'row', padding: 20 }}>
-                  <View style={{alignItems: 'center', padding: 10}}>
-                      <Image source={require('../assets/book.png')}/>
-                  </View>
-
-                  <View style={{alignItems: 'center', padding: 10}}>
-                      <Text style={{marginBottom: 10, fontSize: 20, color: '#fff'}}>Learn more about it!</Text> 
+                      <Text style={{marginBottom: 10, fontSize: 20, color: '#fff'}}>Your Current height is {this.state.height} m</Text> 
                   </View>
                 </View>
               </View>
@@ -167,11 +132,23 @@ class SignUp extends React.Component   {
               <View style ={styles.bottomCardStyle}>
                 <View style={{ display: 'flex', flexDirection: 'row', padding: 20 }}>
                   <View style={{alignItems: 'center', padding: 10}}>
-                      <Image source={require('../assets/book.png')}/>
+                    <MaterialCommunityIcons name="human-male-height" size={35} color="#fff" />
                   </View>
 
                   <View style={{alignItems: 'center', padding: 10}}>
-                      <Text style={{marginBottom: 10, fontSize: 20, color: '#fff'}}>Learn more about it!</Text> 
+                      <Text style={{marginBottom: 10, fontSize: 20, color: '#fff'}}>Your Current weight is {this.state.weight} kg</Text> 
+                  </View>
+                </View>
+              </View>
+
+              <View style ={styles.bottomCardStyle}>
+                <View style={{ display: 'flex', flexDirection: 'row', padding: 20 }}>
+                  <View style={{alignItems: 'center', padding: 10}}>
+                      <FontAwesome5 name="calculator" size={30} color="#fff" />
+                  </View>
+
+                  <View style={{alignItems: 'center', padding: 10}}>
+                      <Text style={{marginBottom: 10, fontSize: 20, color: '#fff'}}>Your Current BMI is {parseInt(this.state.bmi)}</Text> 
                   </View>
                 </View>
               </View>
@@ -210,8 +187,13 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
 
+  text_footer:
+  {
+    color: '#ED7A50',
+    fontWeight: '700', 
+    fontSize: 20,
+  },
   
-
   titleText:
   {
     color: '#ED7A50',
@@ -286,5 +268,5 @@ const styles = StyleSheet.create({
   
 });
 
-export default SignUp;
+export default Me;
 
