@@ -20,6 +20,7 @@ import Me from './components/Me';
 import ReceipeScreen from './components/ReceipeScreen';
 import ProductDetail from './components/ProductDetail';
 import Bmi from './components/Bmi';
+import UpdateMe from './components/UpdateMe';
 
 
 const Navigator = createStackNavigator({
@@ -40,6 +41,7 @@ const Navigator = createStackNavigator({
   Progress: { screen: Progress},
   Plan: { screen: Plan},
   Me: { screen: Me},
+  UpdateMe: { screen: UpdateMe},
   ReceipeScreen: { screen: ReceipeScreen},
   ProductDetail: { screen: ProductDetail },
 },

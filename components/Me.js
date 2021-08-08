@@ -10,6 +10,8 @@ import {firebaseApp} from '../firebase-config';
 import axios from "axios";
 import { HOST_URL } from '../commonConfig';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 class Me extends React.Component   {
 
@@ -30,7 +32,6 @@ class Me extends React.Component   {
         const userId = firebaseApp.auth().currentUser.uid;
         axios.get(HOST_URL + "userInfo/getbmiByUserId?userId=" + userId)
         .then(res => {
-            console.log(res.data.date);
             self.setState({ name: res.data.firstname});
             self.setState({ date: res.data.date});
             self.setState({ gender: res.data.gender});
@@ -45,7 +46,9 @@ class Me extends React.Component   {
   }
 
   componentDidMount() {
+    this.props.navigation.addListener('willFocus', () => {
     this.fetchData();
+    });
   }
 
   render()
@@ -68,7 +71,7 @@ class Me extends React.Component   {
                   {/* <AntDesign name="edit" size={24} color="grey"/> */}
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'column'}}>
-                  <AntDesign name="edit" size={24} color="grey"/>
+                  <AntDesign name="edit" size={24} color="grey" onPress={()=>{this.props.navigation.navigate('UpdateMe', {name: this.state.name, date: this.state.date, gender: this.state.gender})}}/>
                 </View>
             </View>
            

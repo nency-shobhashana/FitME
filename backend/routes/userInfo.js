@@ -39,7 +39,6 @@ router.route('/add').post((req,res) => {
 router.route('/getbmiByUserId').get((req,res) => {
 
     const userId = req.query.userId;
-    console.log(userId)
     const filter = {
       userId: userId,
     };
@@ -55,18 +54,16 @@ router.route('/getbmiByUserId').get((req,res) => {
 });
 
 
-router.route('/').put((req,res) => {
-  const userid =  req.query.userid;
-  const weight = req.body.weight;
-  const bmi = req.body.bmi;
-  
-  console.log(userid);
-  console.log(weight);
-  console.log(bmi);
-    UserInfo.updateOne({userid: userid} , {weight: weight, bmi: bmi}, 
-          function(err, numberAffected, rawResponse) {
-          //handle it
-       })
+router.route('/update').post((req,res) => {
+  const userid =  req.query.userId;
+  const firstname = req.body.firstname;
+  const date = req.body.date;
+  const gender = req.body.gender;
+
+  UserInfo.updateOne({userId: userid} , {firstname: firstname, date: date, gender: gender}, 
+    function(err, numberAffected, rawResponse) {
+    //handle it
+     })
       .then(() => res.json('User updated'))
       .catch(err => res.status(400).json('Error:' + err));
 });

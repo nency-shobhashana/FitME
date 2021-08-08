@@ -61,7 +61,7 @@ class Home extends React.Component {
 
   componentDidMount()
 {
-  this.props.navigation.addListener('willFocus', () => {
+    this.props.navigation.addListener('willFocus', () => {
     this.fetchBmi()
 
   });
