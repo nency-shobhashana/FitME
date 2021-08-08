@@ -7,6 +7,7 @@ router.route('/add').post((req,res) => {
     const firstname = req.body.firstname;
     const gender = req.body.gender;
     const date = req.body.date;
+    const currentDate = req.body.currentDate;
     const height = req.body.height;
     const weight = req.body.weight;
     const userId = req.body.userId;
@@ -14,11 +15,11 @@ router.route('/add').post((req,res) => {
     wei = parseFloat(req.body.weight);
     const bmi = wei / (hei * hei);
 
-    const newUserInfo = new UserInfo({firstname, gender, date, height, weight, userId, bmi});
+    const newUserInfo = new UserInfo({firstname, gender, date, currentDate, height, weight, userId, bmi});
     var bmiDetails = {
         height,
         weight,
-        date,
+        currentDate,
         bmi
     }
 

@@ -10,7 +10,7 @@ class Bmi extends React.Component {
   constructor(props) 
   {
     super(props);
-    this.state = {height: '', weight: '', date: '', bmi: '', currentDate: new Date().getDate(),isLoading: false, error: ''}
+    this.state = {height: '', weight: '', currentDate: '', bmi: '', isLoading: false, error: ''}
   }
 
   addData = () =>
@@ -29,7 +29,7 @@ class Bmi extends React.Component {
       axios.post(HOST_URL + "userBmi/add", {
         height: this.state.height,
         weight: this.state.weight,
-        date: new Date(),
+        currentDate: new Date(),
         userId: userId,
         bmi: this.calcBmi(),
       })

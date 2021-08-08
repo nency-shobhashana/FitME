@@ -13,7 +13,7 @@ class UserDetail extends React.Component {
     constructor(props) 
     {
       super(props);
-      this.state = {firstname: '', date: '', bmi: '', currentDate: new Date().getDate(), height: '', weight: '',isLoading: false, error: '', selectedcat: "", category: [
+      this.state = {firstname: '', bmi: '', date: '', currentDate: '', prsentDate: new Date().getDate(), height: '', weight: '',isLoading: false, error: '', selectedcat: "", category: [
         {
           itemName: "Male"
         },
@@ -54,8 +54,10 @@ class UserDetail extends React.Component {
         firstname: this.state.firstname,
         gender: this.state.selectedcat,
         date: this.state.date,
+        currentDate: new Date(),
         height: this.state.height,
         weight: this.state.weight,
+        date: this.state.date,
         userId: firebaseApp.auth().currentUser.uid,
       })
       .then(res => {
@@ -98,7 +100,7 @@ class UserDetail extends React.Component {
             onValueChange={this.onValueChangeCat.bind(this)}
           >
             {this.state.category.map((item, index) => (
-              <Picker.Item
+              <Picker.Item 
                 color="#0087F0"
                 label={item.itemName}
                 value={item.itemName}
@@ -117,7 +119,7 @@ class UserDetail extends React.Component {
           placeholder="select date"
           format="DD-MM-YYYY"
           // minDate="01-01-2016"
-          maxDate = {this.state.currentDate}
+          maxDate = {this.state.prsentDate}
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{

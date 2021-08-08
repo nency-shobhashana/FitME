@@ -16,6 +16,10 @@ const UserInfoSchema = new Schema({
     {
         type: String,
     },
+    currentDate:
+    {
+        type: Date,
+    },
     height:
     {
         type: String,
