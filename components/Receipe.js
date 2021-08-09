@@ -24,7 +24,7 @@ class Receipe extends React.Component {
 
     let url = HOST_URL + "product";
     if (catId != null && catId != undefined && catId != "") {
-      url = url + "?categoryId=" + catId + "&receipeType="+ this.props.receipeType;
+      url = url + "?categoryId=" + catId + "&bmi=" + this.props.bmi + "&receipeType="+ this.props.receipeType;
 
       axios.get(url).then((res) => {
         this.setState({ products: res.data });

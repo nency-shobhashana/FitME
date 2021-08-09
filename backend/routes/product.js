@@ -5,14 +5,20 @@ let Category = require('../models/category');
 
 router.route('/').get((req,res) => {
     const categoryId = req.query.categoryId
+    const bmi = req.query.bmi
     const receipeType = req.query.receipeType;
     if(categoryId == undefined || categoryId == null){
         Product.find()
             .then(product => res.json(product))
             .catch(err => res.status(400).json('Error:' + err));
     }
-    else {
+    else if(bmi == undefined || bmi == null || bmi == 0 || bmi == '0'){
         Product.find({category: categoryId, receipeType: receipeType})
+            .then(product => res.json(product))
+            .catch(err => res.status(400).json('Error:' + err));
+    }
+    else {
+        Product.find({category: categoryId, receipeType: receipeType, bmi: bmi})
             .then(product => res.json(product))
             .catch(err => res.status(400).json('Error:' + err));
     }

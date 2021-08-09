@@ -96,6 +96,8 @@ class ProductDetail extends React.Component {
             <Text style={styles.itemText}>{this.state.product.name}</Text>
             <View style={styles.itemtitle}>
             </View>
+            <Text style={styles.itemtitle}>BMI</Text>
+            <Text style={styles.itemDesc}>{this.state.product.bmi}</Text>
             <Text style={styles.itemtitle}>Ingredients</Text>
             <Text style={styles.itemDesc}>{this.state.product.ingredients}</Text>
             <Text style={styles.itemtitle}>How to make it:</Text>
