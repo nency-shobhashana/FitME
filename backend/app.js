@@ -12,8 +12,8 @@ app.use(cors());
 app.options('*', cors());
 
 
-const PUBLISHABLE_KEY = "ADD_PUBLISHABLE KEY HERE";
-const SECRET_KEY = "ADD_SECRETE KEY HERE";
+const PUBLISHABLE_KEY = "pk_test_51JMZBKJ05k18rayZrbN3rAiCkFTV0uzkZCqjgVUNQKNDSda44Agckge6Jwnsp0qrqan4yVdC4cCUseLUghziy90x00WZloT6aI";
+const SECRET_KEY = "sk_test_51JMZBKJ05k18rayZOkiM8D6racHeaRythKNrEcIhMDIKJgNMSbX2rHN98inBG7axnNGTo0PcWcGOmTizRmjAKy9z00oisVzoBZ";
 
 
 
