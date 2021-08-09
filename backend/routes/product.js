@@ -40,10 +40,11 @@ router.route('/:id').put((req,res) => {
     const category = req.body.categoryId;
     const receipeType = req.body.receipeType;
     const image = req.body.image;
+    const bmi = req.body.bmi;
     const details = req.body.productDescription;
     const ingredients = req.body.productIngredients;
 
-    var updateData = {name, category, receipeType, details, ingredients}
+    var updateData = {name, category, receipeType, bmi, details, ingredients}
     console.log(image)
     if(image != null && image != undefined){
         updateData = {...updateData, image}
@@ -65,9 +66,10 @@ router.route('/add').post((req,res) => {
     const category = req.body.categoryId;
     const receipeType = req.body.receipeType;
     const image = req.body.image;
+    const bmi = req.body.bmi;
     const details = req.body.productDescription;
     const ingredients = req.body.productIngredients;
-    const newProduct = new Product({name, category,receipeType, image, details, ingredients});
+    const newProduct = new Product({name, category,receipeType, image, bmi, details, ingredients});
 
     newProduct.save()
         .then(() => {

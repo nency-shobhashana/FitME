@@ -20,6 +20,10 @@ const ProductSchema = new Schema({
         type: String,
         required: false
     },
+    bmi: {
+        type: String,
+        required: false
+    },
     details: {
         type: String,
         required: false
