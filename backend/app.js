@@ -4,10 +4,22 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 require('dotenv/config');
+//import Stripe from "stripe";
+const Stripe = require('stripe');
 app.use(bodyParser.json());
 
 app.use(cors());
 app.options('*', cors());
+
+
+const PUBLISHABLE_KEY = "pk_test_51JMZBKJ05k18rayZrbN3rAiCkFTV0uzkZCqjgVUNQKNDSda44Agckge6Jwnsp0qrqan4yVdC4cCUseLUghziy90x00WZloT6aI";
+const SECRET_KEY = "sk_test_51JMZBKJ05k18rayZOkiM8D6racHeaRythKNrEcIhMDIKJgNMSbX2rHN98inBG7axnNGTo0PcWcGOmTizRmjAKy9z00oisVzoBZ";
+
+
+
+//Confirm the API version from your stripe dashboard
+stripe = Stripe(SECRET_KEY, { apiVersion: "2020-08-27" });
+
 
 mongoose.set('useFindAndModify', false);
 
@@ -22,6 +34,27 @@ const bmiRoute = require('./routes/bmi');
 app.get('/', (req, res) => {
     res.send("Welcome to Home");
 })
+
+
+app.post("/create-payment-intent", async (req, res) => {
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: 1099, //lowest denomination of particular currency
+        currency: "usd",
+        payment_method_types: ["card"], //by default
+      });
+  
+      const clientSecret = paymentIntent.client_secret;
+  
+      res.json({
+        clientSecret: clientSecret,
+      });
+    } catch (e) {
+      console.log(e.message);
+      res.json({ error: e.message });
+    }
+  });
+  
 
 
 //Connect to DB
