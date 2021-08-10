@@ -45,7 +45,9 @@ class UserInfo extends React.Component {
               <Text style={styles.itemText}>{item.firstname}</Text>
               <Text style={styles.itemText}>{item.emailId}</Text>
               <Text style={[styles.itemText, {fontWeight: 'normal'}]}>BMI: {item.bmi}</Text>
-              <TouchableOpacity style={styles.button} onPress={() => this.editProduct( item._id)}>
+              <TouchableOpacity style={styles.button} onPress={() => 
+                this.props.navigation.navigate('adminChat', {uid: item.userId})
+                }>
                   <AntDesign style={styles.rightIcon} name="edit" size={24} color="black" />
               </TouchableOpacity>
               <TouchableOpacity style={styles.button} onPress={() => this.deleteProduct( item._id)}>

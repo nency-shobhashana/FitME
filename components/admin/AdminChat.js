@@ -2,47 +2,32 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import {firebaseApp} from '../firebase-config';
+import {firebaseApp} from '../../firebase-config';
 import axios from "axios";
-import { HOST_URL } from '../commonConfig'
+import { HOST_URL } from '../../commonConfig'
 import { StackActions, NavigationActions } from 'react-navigation'; 
 import { GiftedChat, IMessage, User } from 'react-native-gifted-chat'
 import moment from 'moment';
 
-class Chat extends React.Component {
+class AdminChat extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {messages: []}
+    this.state = {messages: [], userId: this.props.navigation.getParam('uid')}
   }
 
   onSend = (newMsg) => {
     console.log(newMsg)
-    axios.post(HOST_URL + "chat/add", {
+    axios.post(HOST_URL + "chat/admin/add", {
       text: newMsg[0].text,
       userId: this.state.userId
     })
     .then(res => {this.getChat()})
   }
 
-  user = { _id: 1, name: 'User' }
-
-  initChat = () => {
-    console.log("initChat")
-
-    var self = this;
-    const currentUser = firebaseApp.auth().currentUser
-    if(currentUser != null || currentUser != undefined){
-      const userId = currentUser.uid;
-      self.setState({userId}, () => {this.getChat()})
-    }
-  }
-  
+  admin = { _id: 0, name: 'Admin' }
 
   getChat = () => {
-    if(this.state.userId == undefined){
-      return
-    }
     axios.get(HOST_URL + "chat/" + this.state.userId)
     .then(res => {
       if(res.data == null){
@@ -55,7 +40,7 @@ class Chat extends React.Component {
             text: msg.text,
             user: {
               _id: 0,
-              name: 'Admin',
+              name: 'me',
             },
             createdAt: moment(msg.date).toDate(),
           }
@@ -64,7 +49,7 @@ class Chat extends React.Component {
           _id: msg.date,
           text: msg.text,
           user: {
-            _id: 1,
+            _id: 2,
             name: 'User',
           },
           createdAt: moment(msg.date).toDate(),
@@ -75,7 +60,7 @@ class Chat extends React.Component {
   }
 
   componentDidMount() {
-    this.initChat()
+    this.getChat()
   }
 
   render()
@@ -87,7 +72,7 @@ class Chat extends React.Component {
     }
     return (
     <View style={styles.container}>
-      <GiftedChat {...{ onSend: this.onSend, user: this.user, messages: this.state.messages, inverted: false }} />
+      <GiftedChat {...{ onSend: this.onSend, user: this.admin, messages: this.state.messages, inverted: false }} />
     </View>
   );
   }  
@@ -231,6 +216,6 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Chat;
+export default AdminChat;
 
 
