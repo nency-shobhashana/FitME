@@ -15,6 +15,7 @@ export default class Product extends Component {
       categoryId: '',
       productDescription: '',
       productIngredients: '',
+      bmi:'',
       categories:[],
       receipeTypes:["Veg", "NonVeg", "Kito", "Vegan"]
     }
@@ -32,6 +33,7 @@ export default class Product extends Component {
               productId: res.data._id,
               productName: res.data.name,
               categoryId: res.data.category,
+              bmi: res.data.bmi,
               receipeType: res.data.receipeType,
               productDescription: res.data.details,
               productIngredients: res.data.ingredients,
@@ -66,6 +68,7 @@ export default class Product extends Component {
       productName: this.state.productName,
       receipeType: this.state.receipeType,
       categoryId: this.state.categoryId,
+      bmi: this.state.bmi,
       productDescription: this.state.productDescription,
       productIngredients: this.state.productIngredients
     }
@@ -83,6 +86,7 @@ export default class Product extends Component {
         this.setState({
           productName: '',
           categoryId: '',
+          bmi: '',
           productDescription: '',
           productIngredients: '',
         })
@@ -95,6 +99,7 @@ export default class Product extends Component {
           this.setState({
             productName: '',
             categoryId: '',
+            bmi: '',
             productDescription: '',
             productIngredients: '',
           })
@@ -141,6 +146,7 @@ export default class Product extends Component {
                 title="Pick an image"
               />
             </View>
+            <TextInput style={styles.TextInput} placeholder="BMI" value={this.state.bmi} onChangeText={(val) => this.updateInputVal(val, 'bmi')}/>
             <TextInput style={styles.TextInput} placeholder="Type recipe Ingredients" value={this.state.productIngredients} onChangeText={(val) => this.updateInputVal(val, 'productIngredients')}/>
             <TextInput style={styles.TextInput} placeholder="Type recipe description" value={this.state.productDescription} onChangeText={(val) => this.updateInputVal(val, 'productDescription')}/>
             

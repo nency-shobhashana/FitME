@@ -10,7 +10,7 @@ import Plan from './Plan';
 import Chat from './Chat';
 import Progress from './Progress';
 import Me from './Me';
-import StripeApp from './StripeApp';
+// import StripeApp from './StripeApp';
 
 const PlanStack = createStackNavigator({
     Plan: Plan,

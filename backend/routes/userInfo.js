@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 let UserInfo = require('../models/UserInfo');
+let User = require('../models/User');
 let Bmi = require('../models/Bmi');
 
-router.route('/add').post((req,res) => {
+router.route('/add').post( async (req,res) => {
     const firstname = req.body.firstname;
     const gender = req.body.gender;
     const date = req.body.date;
@@ -50,6 +51,22 @@ router.route('/getbmiByUserId').get((req,res) => {
         }
       })
       .catch((err) => res.status(400).json("Error:" + err));
+
+});
+
+router.route('/').get((req,res) => {
+  UserInfo.find()
+  .then(async (users) => {
+    const promises = users.map(async user => {
+      const userDetail = await User.findOne({userid: user.userId}).exec()
+      const emailId = userDetail.email
+      user['emailId'] = emailId
+      return user
+    })
+    const data = await Promise.all(promises)
+    res.json(data)
+  })
+  .catch((err) => res.status(400).json("Error:" + err));
 
 });
 
