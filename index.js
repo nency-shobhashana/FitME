@@ -22,7 +22,7 @@ import ReceipeScreen from './components/ReceipeScreen';
 import ProductDetail from './components/ProductDetail';
 import Bmi from './components/Bmi';
 import UpdateMe from './components/UpdateMe';
-import StripeApp from './components/StripeApp';
+// import StripeApp from './components/StripeApp';
 import AddadminInfo from './components/admin/AddadminInfo';
 import UpdateProfile from './components/admin/UpdateProfile';
 
@@ -49,7 +49,7 @@ const Navigator = createStackNavigator({
   UpdateMe: { screen: UpdateMe},
   ReceipeScreen: { screen: ReceipeScreen},
   ProductDetail: { screen: ProductDetail },
-  Payment: { screen: StripeApp },
+  // Payment: { screen: StripeApp },
   AdminInfo: { screen: AddadminInfo },
   UpdateProfile: { screen: UpdateProfile },
 },

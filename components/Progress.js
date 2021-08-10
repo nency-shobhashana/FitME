@@ -83,10 +83,6 @@ const styles = StyleSheet.create({
   },
   item: {
     padding: 12,
-    borderColor: '#000',
-    // backgroundColor: '#e2ffd4',
-    borderBottomWidth: 1,
-    borderRadius: 5,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'

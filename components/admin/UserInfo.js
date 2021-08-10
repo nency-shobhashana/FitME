@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { SafeAreaView, ScrollView, FlatList, StyleSheet, Text, Button, TouchableOpacity, View, Image, TextInput } from 'react-native';
+import { SafeAreaView, ScrollView, FlatList, StyleSheet, Text, Button, TouchableOpacity, View, Dimensions, Image, TextInput } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import {HOST_URL} from '../../commonConfig'
 class UserInfo extends React.Component {
@@ -37,22 +37,22 @@ class UserInfo extends React.Component {
           extraData={this.state}
           renderItem={({item}) => {
             return (
-            <TouchableOpacity style={styles.item} 
+            <TouchableOpacity style={styles.recipeCardStyle} 
             // onPress={() => 
             // this.props.navigation.navigate('ProductDetail', {productId: item._id})
             // }
             >
               <Text style={styles.itemText}>{item.firstname}</Text>
-              <Text style={styles.itemText}>{item.emailId}</Text>
-              <Text style={[styles.itemText, {fontWeight: 'normal'}]}>BMI: {item.bmi}</Text>
+              {/* <Text style={styles.itemText}>{item.emailId}</Text> */}
+              <Text style={[styles.itemText, {fontWeight: 'normal'}]}>BMI: {parseInt(item.bmi)}</Text>
               <TouchableOpacity style={styles.button} onPress={() => 
                 this.props.navigation.navigate('adminChat', {uid: item.userId})
                 }>
-                  <AntDesign style={styles.rightIcon} name="edit" size={24} color="black" />
+                  <AntDesign style={styles.rightIcon} name="wechat" size={24} color="black" />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={() => this.deleteProduct( item._id)}>
+              {/* <TouchableOpacity style={styles.button} onPress={() => this.deleteProduct( item._id)}>
                   <AntDesign style={styles.rightIcon} name="delete" size={24} color="black" />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </TouchableOpacity>
           )}}/>
         </SafeAreaView></View>
@@ -60,11 +60,11 @@ class UserInfo extends React.Component {
   }
 }
 
+const deviceWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF',
     flex: 1,
-    padding: 20,
   },
   titleText:
   {
@@ -113,22 +113,35 @@ const styles = StyleSheet.create({
     // shadowRadius: 6,
     // shadowOpacity: 1,  
   },
+  recipeCardStyle:
+  {
+    margin: 15,
+    marginTop: 10,
+    width: deviceWidth -30,
+    backgroundColor: "#fff",
+    height: 120,
+    borderRadius: 6,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 5,
+      height: 5
+    },
+    shadowOpacity: 0.25,
+    elevation: 9,
+    shadowRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   button: {
-    padding: 12,
-    borderColor: '#000',
-    // backgroundColor: '#e2ffd4',
-    borderBottomWidth: 1,
-    borderRadius: 5,
+    padding: 6,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
   },
   itemText: {
-    marginLeft: 10,
-    marginTop: 3,
-    flexGrow: 2,
     fontSize: 20,
     fontWeight: 'bold',
+    marginBottom: 5,
   },
   itemPrice: {
     marginLeft: 10,
