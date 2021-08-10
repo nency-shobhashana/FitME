@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from 'react-native';
 import {firebaseApp} from '../../firebase-config';
+import {HOST_URL} from '../../commonConfig';
+import axios from 'axios';
 
 
 
@@ -10,7 +12,7 @@ class Dashboard extends React.Component {
   constructor(props) 
   {
     super(props);
-    this.state = {email: '', password: '',isLoading: false, error: ''}
+    this.state = {email: '', password: '',isLoading: false, error: '', categoryCount: '', productCount: '', userCount: ''}
   }
 
   signOutUser = async () => {
@@ -23,6 +25,29 @@ class Dashboard extends React.Component {
       console.log(e);
     }
   }
+
+  componentDidMount(){
+    this.initDashboard()
+    this.willFocusSubscription = this.props.navigation.addListener(
+      'willFocus',
+      () => {
+        this.initDashboard();
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    this.willFocusSubscription.remove();
+  }
+
+  initDashboard() {
+    console.log("initProduct")
+    
+    axios.get(HOST_URL + 'dashboard')
+      .then(res => {
+        this.setState(res.data)
+      });
+  }
   
   render()
   {
@@ -30,6 +55,9 @@ class Dashboard extends React.Component {
     <ScrollView>
       <View style={styles.container}>
         <Text>Welcome to Home</Text>
+        <Text>Category Count: {this.state.categoryCount}</Text>
+        <Text>Product Count: {this.state.productCount}</Text>
+        <Text>User Count: {this.state.userCount}</Text>
         <View style={styles.profileFooterBtn}>
           <TouchableOpacity style={styles.button} onPress={() => this.signOutUser()}>
             <Text>Logout</Text>

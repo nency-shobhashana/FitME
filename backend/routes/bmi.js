@@ -40,12 +40,9 @@ router.route('/getbmiByUserId').get((req,res) => {
     const filter = {
       userId: userId,
     };
-    Bmi.find(filter)
+    Bmi.findOne(filter)
       .then((docs) => {
-        if (docs.length > 0) res.json(docs);
-        else {
-          res.json({});
-        }
+        res.json(docs);
       })
       .catch((err) => res.status(400).json("Error:" + err));
 

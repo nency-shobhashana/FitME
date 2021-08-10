@@ -24,6 +24,7 @@ stripe = Stripe(SECRET_KEY, { apiVersion: "2020-08-27" });
 mongoose.set('useFindAndModify', false);
 
 //Import Routes
+const boardRoute = require('./routes/dashboard');
 const authRoute = require('./routes/auth');
 const categoryRoute = require('./routes/category');
 const productRoute = require('./routes/product');
@@ -69,6 +70,7 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, (err) =>{
     app.use('/userBmi', bmiRoute);
     app.use('/category', categoryRoute);
     app.use('/product', productRoute);
+    app.use('/dashboard', boardRoute);
 })
 
 app.listen(3000);

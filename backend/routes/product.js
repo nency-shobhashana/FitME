@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 let Product = require('../models/product');
-let Category = require('../models/category');
 
 router.route('/').get((req,res) => {
     const categoryId = req.query.categoryId

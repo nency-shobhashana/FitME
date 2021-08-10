@@ -1,163 +1,131 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { Component } from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import * as React from 'react';
+import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import { SafeAreaView, ScrollView, FlatList, useWindowDimensions, StyleSheet, Text, TouchableOpacity, Dimensions, View, Image, TextInput, Button } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 import {firebaseApp} from '../firebase-config';
-import axios from "axios";
-import { HOST_URL } from '../commonConfig'
-import { StackActions, NavigationActions } from 'react-navigation'; 
+import {HOST_URL} from '../commonConfig'
+import axios from 'axios';
+import moment from 'moment';
 
 class Progress extends React.Component {
-  
-  render()
-  {
+ 
+  state = { bmiList: ''}
+
+  initBmi = () => {
+    console.log("initBmi")
+
+    var self = this;
+    firebaseApp.auth().onAuthStateChanged(function (user) {
+      if (user) 
+      {
+        const userId = firebaseApp.auth().currentUser.uid;
+        axios.get(HOST_URL + "userBmi/getbmiByUserId?userId=" + userId)
+          .then(res => {
+            self.setState({bmiList: res.data.details})
+          });
+      }
+    });
+  }
+
+  componentDidMount(){
+    this.initBmi()
+  }
+
+  render() {
     return (
-    <ScrollView>
       <View style={styles.container}>
-        <Text>Welcome to Progress</Text>
+        <SafeAreaView>
+          <FlatList
+          data={this.state.bmiList}
+          extraData={this.state}
+          renderItem={({item}) => (
+            <View style={styles.recipeCardStyle}>
+                <View style={styles.item}>
+                <Text style={styles.itemText}>Weight: </Text>
+                  <Text style={styles.text}>{item.weight}</Text>
+                </View>
+                <View style={styles.item}>
+                <Text style={styles.itemText}>Height: </Text>
+                  <Text style={styles.text}>{item.height}</Text>
+                </View>
+                <View style={styles.item}>
+                <Text style={styles.itemText}>Date: </Text>
+                  <Text style={styles.text}>{moment(item.currentDate).format("MMMM Do YYYY")}</Text>
+                </View>
+                <View style={styles.item}>
+                <Text style={styles.itemText}>BMI: </Text>
+                  <Text style={styles.text}>{parseInt(item.bmi)}</Text>
+                </View>
+              </View>
+          )}/>
+        </SafeAreaView>
       </View>
-    </ScrollView>
-  );
-  }  
+    );
+  }
 }
 
-
+const deviceWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
     flex: 1,
-    paddingTop: 50,
-  },
-
-  header: {
-   flex: 1,
-   justifyContent: 'flex-end',
-   paddingHorizontal: 20,
-   paddingBottom: 50,
-  },
-
-
-  footer:
-  {
-    flex: 3,
-    backgroundColor: '#fff',
-    borderTopRightRadius: 50,
-    borderTopLeftRadius: 50,
-    paddingHorizontal: 20,
-    paddingVertical: 30,
-  },
-
-  
-
-  titleText:
-  {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingTop: 10,
-  },
-
-  action:
-  {
-      flexDirection: 'row',
-      marginTop: 20,
-  },
-
-  TextInput:
-  {
-    paddingLeft: 30,
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'grey',
-    flex: 1,
-    fontSize: 15,
-    paddingBottom: 6,
-  },
-
-  inputIcon:
-  {
-    position: 'absolute',
-  },
-
-  signUpbutton:
-  {
-    alignItems: 'center',
-    marginTop: 50,
-  },
-
-  signInbutton:
-  {
-    alignItems: 'center',
-    marginTop: 20,
-  },
-
-  signUp:
-  {
-    width: '100%',
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    backgroundColor: '#EB6C3E'
-  },
-
-  signIn:
-  {
-    width: '100%',
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#EB6C3E'
+    justifyContent: 'flex-start',
     
   },
-
-  signbtnText:
-  {
-      color: '#fff',
-      fontSize: 15,
-  },
-
-  signGoogle:
-  {
-    alignItems: 'center',
-    marginTop: 30,
-  },
-
-  signUpGoogle:
-  {
-    width: '100%',
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
+  item: {
+    padding: 12,
+    borderColor: '#000',
+    // backgroundColor: '#e2ffd4',
+    borderBottomWidth: 1,
     borderRadius: 5,
-    backgroundColor: '#BCBBCC'
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
-
-  signUpGoogleText:
+  recipeCardStyle:
   {
-    color: '#0A090B',
-    fontSize: 15,
-  },
-
-  profileFooterBtn:
-  {
-    paddingTop: '5%',
-    paddingRight: '75%',
-    color: 'red',
-    fontSize: 20,
-  },
-
-  button: {
-    margin: 12,
-    height: 40,
+    margin: 10,
+    marginTop: 8,
+    width: deviceWidth -20,
+    backgroundColor: "#fff",
+    height: 180,
+    borderRadius: 6,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 5,
+      height: 5
+    },
+    shadowOpacity: 0.25,
+    elevation: 9,
+    shadowRadius: 5,
     justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    borderColor: '#EB6C3E',
-    borderWidth: 1,
-    backgroundColor: '#EB6C3E',
+    alignItems: 'center'
+  },
+  itemText: {
+    fontWeight: 'bold',
+  },
+  imageView: {
+    display: 'flex',
+    width: 80, 
+    height: 80,
+    padding: 10,
+    borderRadius: 100,
+    borderWidth: 2,
+    borderColor: 'tomato',
+    backgroundColor: '#FFF',
+  },
+  image: {
+    flexGrow: 1,
+    resizeMode: 'center'
+  },
+  productCount: {
+    flexShrink:1,
+    marginRight: 20,
+  },
+  rightIcon:{
+    flexShrink:1,
+    color: '#75c34d',
   }
+
 });
 
 export default Progress;
