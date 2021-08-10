@@ -37,6 +37,11 @@ const UserInfoSchema = new Schema({
         type: String,
     },
 
+    isPaid:
+    {
+        type: String,
+    },
+
     bmi:
     {
         type: String

@@ -85,7 +85,27 @@ class Chat extends React.Component {
     });
   }
 
+  isPaid = () =>
+  {
+      const userId = firebaseApp.auth().currentUser.uid;
+      axios.get(HOST_URL + "userInfo/getbmiByUserId?userId=" + userId)
+      .then(res => {
+            if(res.data.isPaid === "no")
+            {
+              const navigateAction = StackActions.reset({
+                index: 0,
+                actions: [NavigationActions.navigate({ routeName: "Payment" })],
+              });
+              this.props.navigation.dispatch(navigateAction);
+            }
+           
+        }).catch(function (error) {
+          console.log("error", error);
+        })
+  }
+
   componentDidMount() {
+    this.isPaid()
     this.initChat()
     this.willFocusSubscription = this.props.navigation.addListener(
       'willFocus',

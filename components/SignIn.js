@@ -19,7 +19,7 @@ class SignIn extends React.Component {
 
   signIn = () => 
   {
-    console.log("Working");
+  
     const email = this.state.email;
     const password = this.state.password;
     

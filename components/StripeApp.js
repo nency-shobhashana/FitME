@@ -7,11 +7,15 @@ import { color } from "react-native-reanimated";
 import { ScrollView } from "react-native-gesture-handler";
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import { useNavigation } from '@react-navigation/native';
+import {firebaseApp} from '../firebase-config';
+import axios from "axios";
+
 
 const API_URL = "http://localhost:3000";
 
 const StripeApp = props => {
-    
+  
   const [email, setEmail] = useState();
   const [cardDetails, setCardDetails] = useState();
   const { confirmPayment, loading } = useConfirmPayment();
@@ -52,6 +56,8 @@ const StripeApp = props => {
           alert(`Payment Confirmation Error ${error.message}`);
         } else if (paymentIntent) {
           alert("Payment Successful");
+          handleScreen();
+          //props.navigation.navigate('Chat');
           console.log("Payment successful ", paymentIntent);
         }
       }
@@ -59,6 +65,21 @@ const StripeApp = props => {
       console.log(e);
     }
   };
+
+  const handleScreen = () =>
+  {
+        const userId = firebaseApp.auth().currentUser.uid;
+        axios.post(HOST_URL + "userInfo/update?userId=" + userId,
+        {
+            isPaid: "yes",
+         })
+        .then(res => {
+          console.log("isPaid updated");
+          props.navigation.navigate('Chat');
+         }).catch(function (error) {
+        console.log("error", error);
+      })  
+  }
 
 
 return (

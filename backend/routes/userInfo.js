@@ -12,11 +12,12 @@ router.route('/add').post( async (req,res) => {
     const height = req.body.height;
     const weight = req.body.weight;
     const userId = req.body.userId;
+    const isPaid = req.body.isPaid;
     hei = parseFloat(req.body.height);
     wei = parseFloat(req.body.weight);
     const bmi = wei / (hei * hei);
 
-    const newUserInfo = new UserInfo({firstname, gender, date, currentDate, height, weight, userId, bmi});
+    const newUserInfo = new UserInfo({firstname, gender, date, currentDate, height, weight, userId, isPaid, bmi});
     var bmiDetails = {
         height,
         weight,
@@ -76,8 +77,9 @@ router.route('/update').post((req,res) => {
   const firstname = req.body.firstname;
   const date = req.body.date;
   const gender = req.body.gender;
+  const isPaid = req.body.isPaid;
 
-  UserInfo.updateOne({userId: userid} , {firstname: firstname, date: date, gender: gender}, 
+  UserInfo.updateOne({userId: userid} , {firstname: firstname, date: date, gender: gender, isPaid: isPaid}, 
     function(err, numberAffected, rawResponse) {
     //handle it
      })

@@ -21,7 +21,7 @@ class Profile extends React.Component {
 
   fetchData = () =>
   {
-    var self = this;
+        var self = this;
         const userId = firebaseApp.auth().currentUser.uid;
         axios.get(HOST_URL + "dietician/getInfobyUserId?userId=" + userId)
         .then(res => {
