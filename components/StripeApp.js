@@ -69,13 +69,13 @@ const StripeApp = props => {
   const handleScreen = () =>
   {
         const userId = firebaseApp.auth().currentUser.uid;
-        axios.post(HOST_URL + "userInfo/update?userId=" + userId,
+        axios.post(HOST_URL + "userInfo/updatepayment?userId=" + userId,
         {
             isPaid: "yes",
          })
         .then(res => {
           console.log("isPaid updated");
-          props.navigation.navigate('Chat');
+          props.navigation.navigate('Home');
          }).catch(function (error) {
         console.log("error", error);
       })  

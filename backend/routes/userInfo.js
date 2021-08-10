@@ -87,4 +87,16 @@ router.route('/update').post((req,res) => {
       .catch(err => res.status(400).json('Error:' + err));
 });
 
+router.route('/updatepayment').post((req,res) => {
+  const userid =  req.query.userId;
+  const isPaid = req.body.isPaid;
+
+  UserInfo.updateOne({userId: userid} , {isPaid: isPaid}, 
+    function(err, numberAffected, rawResponse) {
+    //handle it
+     })
+      .then(() => res.json('User updated'))
+      .catch(err => res.status(400).json('Error:' + err));
+});
+
 module.exports = router

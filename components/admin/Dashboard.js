@@ -15,16 +15,6 @@ class Dashboard extends React.Component {
     this.state = {email: '', password: '',isLoading: false, error: '', categoryCount: '', productCount: '', userCount: ''}
   }
 
-  signOutUser = async () => {
-    var self = this;
-    try {
-      await firebaseApp.auth().signOut();
-      this.props.navigation.navigate('SignIn')
-
-    } catch (e) {
-      console.log(e);
-    }
-  }
 
   componentDidMount(){
     this.initDashboard()
@@ -76,12 +66,6 @@ class Dashboard extends React.Component {
             <Text style={styles.itemText}>User Count: </Text>
             <Text style={styles.text}>{this.state.userCount}</Text>
           </View>
-        </View>
-        
-        <View style={styles.profileFooterBtn}>
-          <TouchableOpacity style={styles.button} onPress={() => this.signOutUser()}>
-            <Text>Logout</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>

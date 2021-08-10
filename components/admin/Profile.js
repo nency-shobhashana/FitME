@@ -45,6 +45,17 @@ class Profile extends React.Component {
   
     });
   }
+
+  signOutUser = async () => {
+    var self = this;
+    try {
+      await firebaseApp.auth().signOut();
+      this.props.navigation.navigate('SignIn')
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
   
   render()
   {
@@ -145,6 +156,12 @@ class Profile extends React.Component {
         </View>          
       </View>
 
+      <View style={styles.profileFooterBtn}>
+          <TouchableOpacity style={styles.button} onPress={() => this.signOutUser()}>
+            <Text>Logout</Text>
+          </TouchableOpacity>
+      </View>
+
       </View>
     </ScrollView>
   );
@@ -207,6 +224,25 @@ const styles = StyleSheet.create({
   {
     marginTop: 10
   },
+
+  button: {
+    margin: 8,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    borderColor: '#EB6C3E',
+    borderWidth: 1,
+    backgroundColor: '#EB6C3E',
+    width: deviceWidth-30,
+  },
+
+  profileFooterBtn:
+  {
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+
 });
 
 export default Profile;
