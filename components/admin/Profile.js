@@ -4,25 +4,71 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Ima
 import {firebaseApp} from '../../firebase-config';
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
+import axios from "axios";
+import { HOST_URL } from '../../commonConfig';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
 class Profile extends React.Component {
 
   constructor(props) 
   {
     super(props);
+    this.state = { firstname: '', specialisation: '', experience: '', education: '', personal: '', contact: '', languages: ''};
+  }
+
+  fetchData = () =>
+  {
+    var self = this;
+        const userId = firebaseApp.auth().currentUser.uid;
+        axios.get(HOST_URL + "dietician/getInfobyUserId?userId=" + userId)
+        .then(res => {
+            self.setState({ firstname: res.data.firstname});
+            self.setState({ specialisation: res.data.specialisation});
+            self.setState({ experience: res.data.experience});
+            self.setState({ education: res.data.education});
+            self.setState({ personal: res.data.personal});
+            self.setState({ contact: res.data.contact});
+            self.setState({ languages: res.data.languages});
+        }).catch(function (error) {
+          console.log("error", error);
+        })
+  }
+ 
+
+  componentDidMount()
+  {
+      this.props.navigation.addListener('willFocus', () => {
+      this.fetchData()
+  
+    });
   }
   
   render()
   {
+
+    const { navigate } = this.props.navigation;
+
     return (
     <ScrollView>
       <View style={styles.container}>
       <View style ={styles.nameCardStyle}>
         <View style={styles.cardContent}>
             <View style={{ display: 'flex', flexDirection: 'row'}}>
-                <FontAwesome name="user-circle-o" size={50} color="grey" />
-               <Text style={{ fontWeight: 'bold',fontSize: 15}}>Doctor Name</Text> 
+              
+                <View style={{ display: 'flex', flexDirection: 'column', width: '20%'}}>
+                    <FontAwesome name="user-circle-o" size={50} color="grey" />
+                </View>
+                <View style={{ display: 'flex', flexDirection: 'column', width: '70%'}}>
+                  <Text style={{ fontWeight: 'bold',fontSize: 23, color: 'blue'}}>{this.state.firstname}</Text>
+                  <Text style={{ fontWeight: '400',fontSize: 15, color: '#FFA500'}}>{this.state.contact}</Text>
+                </View>
+                <View style={{ display: 'flex', flexDirection: 'column'}}>
+                  <AntDesign name="edit" size={24} color="#EB6C3E" onPress={()=>{this.props.navigation.navigate('UpdateProfile', {firstname: this.state.firstname, specialisation: this.state.specialisation, experience: this.state.experience, education: this.state.education, personal: this.state.personal, contact: this.state.contact, languages: this.state.languages})}}/>
+                </View>
+
             </View>
         </View>
       </View>
@@ -34,7 +80,7 @@ class Profile extends React.Component {
                 <Text style={styles.cardHeading}>SPECIALISATION</Text>
           </View>
           <View style={styles.carddetails}>
-            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text> 
+            <Text>{this.state.specialisation}</Text> 
           </View>
         </View>          
       </View>
@@ -46,7 +92,7 @@ class Profile extends React.Component {
                 <Text style={styles.cardHeading}>EXPERIENCE</Text>
           </View>
           <View style={styles.carddetails}>
-            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</Text> 
+            <Text>{this.state.experience}</Text> 
           </View>
         </View>          
       </View>
@@ -58,7 +104,7 @@ class Profile extends React.Component {
                 <Text style={styles.cardHeading}>EDUCATION DETAILS</Text>
           </View>
           <View style={styles.carddetails}>
-            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</Text> 
+            <Text>{this.state.education}</Text> 
           </View>
         </View>          
       </View>
@@ -70,7 +116,7 @@ class Profile extends React.Component {
                 <Text style={styles.cardHeading}>PERSONAL DETAILS</Text>
           </View>
           <View style={styles.carddetails}>
-            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</Text> 
+            <Text>{this.state.personal}</Text> 
           </View>
         </View>          
       </View>
@@ -82,7 +128,7 @@ class Profile extends React.Component {
                 <Text style={styles.cardHeading}>CONTACT DETAILS</Text>
           </View>
           <View style={styles.carddetails}>
-            <Text>4167892456</Text> 
+            <Text>{this.state.contact}</Text> 
           </View>
         </View>          
       </View>
@@ -94,7 +140,7 @@ class Profile extends React.Component {
                 <Text style={styles.cardHeading}>LANGUAGES KNOWN</Text>
           </View>
           <View style={styles.carddetails}>
-            <Text>English, French</Text> 
+            <Text>{this.state.languages}</Text> 
           </View>
         </View>          
       </View>

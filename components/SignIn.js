@@ -52,8 +52,6 @@ class SignIn extends React.Component {
         this.textInput1.clear()
         this.textInput2.clear()
       }).catch((e) => {
-        console.log(e);
-        console.log("Not a valid user");
         alert("Not a valid user");
         this.setState({error: 'Authentication failed', isLoading: false})
       })
