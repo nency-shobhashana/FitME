@@ -21,7 +21,7 @@ class Progress extends React.Component {
         const userId = firebaseApp.auth().currentUser.uid;
         axios.get(HOST_URL + "userBmi/getbmiByUserId?userId=" + userId)
           .then(res => {
-            self.setState({bmiList: res.data.details})
+            self.setState({bmiList: res.data})
           });
       }
     });
@@ -29,6 +29,16 @@ class Progress extends React.Component {
 
   componentDidMount(){
     this.initBmi()
+    this.willFocusSubscription = this.props.navigation.addListener(
+      'willFocus',
+      () => {
+        this.initBmi();
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    this.willFocusSubscription.remove();
   }
 
   render() {

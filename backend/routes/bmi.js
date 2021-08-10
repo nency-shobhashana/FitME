@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 let Bmi = require('../models/Bmi');
 let UserInfo = require('../models/UserInfo');
+// Load the full build.
+var _ = require('lodash');
 
 router.route('/add').post((req,res) => {
     
@@ -31,8 +33,6 @@ router.route('/add').post((req,res) => {
         .catch(err => res.status(400).json('Error:' + err));
 });
 
-
-
 router.route('/getbmiByUserId').get((req,res) => {
 
     const userId = req.query.userId;
@@ -42,7 +42,8 @@ router.route('/getbmiByUserId').get((req,res) => {
     };
     Bmi.findOne(filter)
       .then((docs) => {
-        res.json(docs);
+        const data = _.orderBy(docs.details, ['currentDate'],['desc']);
+        res.json(data);
       })
       .catch((err) => res.status(400).json("Error:" + err));
 

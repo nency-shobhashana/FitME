@@ -34,8 +34,19 @@ class Chat extends React.Component {
     const currentUser = firebaseApp.auth().currentUser
     if(currentUser != null || currentUser != undefined){
       const userId = currentUser.uid;
-      self.setState({userId}, () => {this.getChat()})
+      self.setState({userId}, () => {this.intervalCall()})
     }
+  }
+
+  intervalCall = () => {
+    this.clearIntervalCall()
+    this.interval = setInterval(() => {
+      this.getChat()  
+    }, 2000)
+  }
+
+  clearIntervalCall = () => {
+    clearInterval(this.interval)
   }
   
 
@@ -76,6 +87,24 @@ class Chat extends React.Component {
 
   componentDidMount() {
     this.initChat()
+    this.willFocusSubscription = this.props.navigation.addListener(
+      'willFocus',
+      () => {
+        this.intervalCall();
+      }
+    );
+    this.willUnFocusSubscription = this.props.navigation.addListener(
+      'willBlur',
+      () => {
+        this.clearIntervalCall();
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    this.clearIntervalCall()
+    this.willFocusSubscription.remove();
+    this.willUnFocusSubscription.remove();
   }
 
   render()

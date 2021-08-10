@@ -60,7 +60,35 @@ class AdminChat extends React.Component {
   }
 
   componentDidMount() {
-    this.getChat()
+    this.intervalCall();
+    this.willFocusSubscription = this.props.navigation.addListener(
+      'willFocus',
+      () => {
+        this.intervalCall();
+      }
+    );
+    this.willUnFocusSubscription = this.props.navigation.addListener(
+      'willBlur',
+      () => {
+        this.clearIntervalCall();
+      }
+    );
+  }
+
+  intervalCall = () => {
+    this.clearIntervalCall()
+    this.interval = setInterval(() => {
+      this.getChat()  
+    }, 2000)
+  }
+
+  clearIntervalCall = () => {
+    clearInterval(this.interval)
+  }
+
+  componentWillUnmount() {
+    this.willFocusSubscription.remove();
+    this.willUnFocusSubscription.remove();
   }
 
   render()

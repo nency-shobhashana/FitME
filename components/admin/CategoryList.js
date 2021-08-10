@@ -47,12 +47,6 @@ export default class Category extends Component {
       var self = this;
       try {
           await firebaseApp.auth().signOut();
-  
-          // const navigateAction = StackActions.reset({
-          //   index: 0,
-          //   key: null,
-          //   actions: [NavigationActions.navigate({ routeName: 'SignIn' })],
-          // });
           self.props.navigation.navigate('SignIn');
   
       } catch (e) {
