@@ -51,19 +51,19 @@ class Progress extends React.Component {
           renderItem={({item}) => (
             <View style={styles.recipeCardStyle}>
                 <View style={styles.item}>
-                <Text style={styles.itemText}>Weight: </Text>
+                  <Text style={styles.itemText}>Weight: </Text>
                   <Text style={styles.text}>{item.weight}</Text>
                 </View>
                 <View style={styles.item}>
-                <Text style={styles.itemText}>Height: </Text>
+                  <Text style={styles.itemText}>Height: </Text>
                   <Text style={styles.text}>{item.height}</Text>
                 </View>
                 <View style={styles.item}>
-                <Text style={styles.itemText}>Date: </Text>
+                  <Text style={styles.itemText}>Date: </Text>
                   <Text style={styles.text}>{moment(item.currentDate).format("MMMM Do YYYY")}</Text>
                 </View>
                 <View style={styles.item}>
-                <Text style={styles.itemText}>BMI: </Text>
+                  <Text style={styles.itemText}>BMI: </Text>
                   <Text style={styles.text}>{parseInt(item.bmi)}</Text>
                 </View>
               </View>

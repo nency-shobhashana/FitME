@@ -13,6 +13,10 @@ import UserInfo from './UserInfo';
 import Profile from './Profile';
 import AddadminInfo from './AddadminInfo';
 
+const dashboardStack = createStackNavigator({
+  Dashboard: Dashboard,
+});
+
 const categoryStack = createStackNavigator({
   CategoryList: CategoryList,
 });
@@ -30,7 +34,7 @@ const profileStack = createStackNavigator({
 });
 
 const TabNavigator = createBottomTabNavigator({
-  Home: Dashboard,
+  Home: dashboardStack,
   Category: categoryStack,
   Recipe: productStack,
   UserInfo: userInfoStack,
