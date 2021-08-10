@@ -11,6 +11,7 @@ import CategoryList from './CategoryList';
 import ProductList from './ProductList';
 import UserInfo from './UserInfo';
 import Profile from './Profile';
+import AddadminInfo from './AddadminInfo';
 
 const categoryStack = createStackNavigator({
   CategoryList: CategoryList,

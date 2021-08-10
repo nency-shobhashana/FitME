@@ -22,6 +22,7 @@ import ProductDetail from './components/ProductDetail';
 import Bmi from './components/Bmi';
 import UpdateMe from './components/UpdateMe';
 import StripeApp from './components/StripeApp';
+import AddadminInfo from './components/admin/AddadminInfo';
 
 
 const Navigator = createStackNavigator({
@@ -46,6 +47,7 @@ const Navigator = createStackNavigator({
   ReceipeScreen: { screen: ReceipeScreen},
   ProductDetail: { screen: ProductDetail },
   Payment: { screen: StripeApp },
+  AdminInfo: { screen: AddadminInfo },
 },
 
 {
