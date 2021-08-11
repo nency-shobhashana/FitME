@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { SafeAreaView, ScrollView, FlatList, StyleSheet, Text, Button, TouchableOpacity, View, Image, TextInput } from 'react-native';
+import { SafeAreaView, ScrollView, FlatList, StyleSheet, Text, Button, TouchableOpacity, Dimensions, View, Image, TextInput } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import {HOST_URL} from '../../commonConfig'
 
@@ -55,7 +55,7 @@ export default class Product extends Component {
           extraData={this.state}
           renderItem={({item}) => {
             return (
-            <TouchableOpacity style={styles.item} onPress={() => 
+            <TouchableOpacity style={styles.recipeCardStyle} onPress={() => 
             this.props.navigation.navigate('ProductDetail', {productId: item._id})
             }>
               <View style={styles.imageView}>
@@ -80,9 +80,10 @@ export default class Product extends Component {
   }
 }
 
+const deviceWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF',
+    // backgroundColor: '#FFF',
     flex: 1,
     padding: 20,
     marginBottom: 70,
@@ -107,6 +108,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
     backgroundColor: '#EB6C3E'
+  },
+  recipeCardStyle:
+  {
+    display: 'flex',
+    flexDirection: 'row',
+    // margin: 15,
+    padding: 15,
+    marginTop: 10,
+    backgroundColor: "#fff",
+    height: 120,
+    borderRadius: 6,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 5,
+      height: 5
+    },
+    shadowOpacity: 0.25,
+    elevation: 9,
+    shadowRadius: 5,
+    alignItems: 'center'
   },
   signbtnText:
   {
@@ -136,10 +157,6 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 12,
-    borderColor: '#000',
-    // backgroundColor: '#e2ffd4',
-    borderBottomWidth: 1,
-    borderRadius: 5,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'

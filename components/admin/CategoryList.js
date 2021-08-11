@@ -78,7 +78,6 @@ export default class Category extends Component {
                   />
                 </View>
                 <Text style={styles.itemText}>{item.name}</Text>
-                {/* <Text style={styles.productCount}>{item.count}</Text> */}
                 <TouchableOpacity style={styles.button} onPress={() => this.editCategory( item._id)}>
                     <AntDesign style={styles.rightIcon} name="edit" size={24} color="black" />
                 </TouchableOpacity>
