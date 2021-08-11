@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     flex: 1,
     padding: 20,
+    marginBottom: 70,
   },
   titleText:
   {

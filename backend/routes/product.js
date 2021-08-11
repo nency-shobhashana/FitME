@@ -17,7 +17,9 @@ router.route('/').get((req,res) => {
             .catch(err => res.status(400).json('Error:' + err));
     }
     else {
-        Product.find({category: categoryId, receipeType: receipeType, bmi: bmi})
+        const minBmi = parseInt(bmi) - 2
+        const maxBmi = parseInt(bmi) + 2
+        Product.find({category: categoryId, receipeType: receipeType, bmi: {$gte: minBmi, $lte: maxBmi}})
             .then(product => res.json(product))
             .catch(err => res.status(400).json('Error:' + err));
     }

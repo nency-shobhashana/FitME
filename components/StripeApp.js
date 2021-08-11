@@ -12,7 +12,7 @@ import {firebaseApp} from '../firebase-config';
 import axios from "axios";
 
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://192.168.0.112:3000";
 
 const StripeApp = props => {
   
@@ -128,6 +128,7 @@ return (
           <Text style={styles.payBtnText}>Pay $10.00</Text>
         </TouchableOpacity>
       </View>
+      <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{props.navigation.navigate('Home')}}>Go to Home</Text>
       {/* <Button onPress={handlePayPress} title="Pay" disabled={loading} /> */}
    
         </View>

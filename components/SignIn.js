@@ -139,7 +139,7 @@ googleSignUp = () =>
               </View>
 
             <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('SignUp')}}>Register Here!</Text>
-            <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('Payment')}}>Subscribe</Text>
+            {/* <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('Payment')}}>Subscribe</Text> */}
       
         </View>
         

@@ -84,7 +84,7 @@ class ProductDetail extends React.Component {
     return (
       <View style={styles.container}>
         <SafeAreaView>
-          <ScrollView>
+          <ScrollView contentContainerStyle={{position: 'relative'}}>
             <View style={styles.imageView}>
               <Image
                 style={styles.image}
@@ -92,19 +92,22 @@ class ProductDetail extends React.Component {
                   uri: this.state.product.image,
                 }}
               /> 
+              <View style={styles.imageForground}/>
             </View>
-            <Text style={styles.itemText}>{this.state.product.name}</Text>
-            <View style={styles.itemtitle}>
+            <View style={{paddingHorizontal: 25, top: -80}}>
+              <Text style={styles.itemText}>{this.state.product.name}</Text>
+              <View style={styles.itemtitle}>
+              </View>
+              <Text style={styles.itemtitle}>BMI</Text>
+              <Text style={styles.itemDesc}>{this.state.product.bmi}</Text>
+              <Text style={styles.itemtitle}>Ingredients</Text>
+              <Text style={styles.itemDesc}>{this.state.product.ingredients}</Text>
+              <Text style={styles.itemtitle}>How to make it:</Text>
+              <Text style={styles.itemDesc}>{this.state.product.details}</Text>
+              {/* <TouchableOpacity style={styles.button} onPress={() => this.addTocart(this.props.navigation.getParam('productId'))}>
+                  <Text  style={styles.textBtn}>Add</Text>
+              </TouchableOpacity> */}
             </View>
-            <Text style={styles.itemtitle}>BMI</Text>
-            <Text style={styles.itemDesc}>{this.state.product.bmi}</Text>
-            <Text style={styles.itemtitle}>Ingredients</Text>
-            <Text style={styles.itemDesc}>{this.state.product.ingredients}</Text>
-            <Text style={styles.itemtitle}>How to make it:</Text>
-            <Text style={styles.itemDesc}>{this.state.product.details}</Text>
-            {/* <TouchableOpacity style={styles.button} onPress={() => this.addTocart(this.props.navigation.getParam('productId'))}>
-                <Text  style={styles.textBtn}>Add</Text>
-            </TouchableOpacity> */}
           </ScrollView>
         </SafeAreaView>
       </View>
@@ -117,22 +120,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     backgroundColor: '#FFF',
-    padding: 15,
   },
   imageView: {
-    display: 'flex',
-    width: 300, 
-    height: 300,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: 'tomato',
-    backgroundColor: '#FFF',
-    alignSelf:'center',
-    marginBottom: 15,
   },
   image: {
-    flexGrow: 1,
-    resizeMode: 'center'
+    width:'100%',
+    aspectRatio:1,
+    resizeMode: 'cover'
+  },
+  imageForground: {
+    position:'relative',
+    backgroundColor: '#fff',
+    width:'100%',
+    height: 50,
+    top: -50,
+    borderTopStartRadius: 45,
+    borderTopEndRadius: 45,
+    borderWidth: 1,
+    borderColor: "#fff"
   },
   itemText: {
     marginBottom: 8,

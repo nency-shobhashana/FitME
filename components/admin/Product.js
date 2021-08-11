@@ -44,7 +44,7 @@ export default class Product extends Component {
             this.props.navigation.pop()
           })
         } else {
-          this.setState({categories: catRes.data, categoryId: catRes.data[0]._id})
+          this.setState({categories: catRes.data, categoryId: catRes.data[0]._id, receipeType: this.state.receipeTypes[0]})
         }
       });
     if (Platform.OS !== "web") {
