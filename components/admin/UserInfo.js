@@ -63,7 +63,7 @@ class UserInfo extends React.Component {
 const deviceWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF',
+    // backgroundColor: '#FFF',
     flex: 1,
   },
   titleText:

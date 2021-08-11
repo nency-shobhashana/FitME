@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
-import { SafeAreaView, ScrollView, FlatList, useWindowDimensions, StyleSheet, Text, TouchableOpacity, View, Image, TextInput, Button } from 'react-native';
+import { SafeAreaView, ScrollView, FlatList, useWindowDimensions, StyleSheet, Text, TouchableOpacity, Dimensions, View, Image, TextInput, Button } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import {HOST_URL} from '../commonConfig'
 import axios from 'axios';
@@ -26,50 +26,71 @@ class Plan extends React.Component {
       <View style={styles.container}>
         <SafeAreaView>
           <FlatList
+          columnWrapperStyle={{ justifyContent: "space-evenly" }}
           data={this.state.categories}
           extraData={this.state}
+          numColumns={2}
           renderItem={({item}) => (
-              <TouchableOpacity style={styles.item} onPress={() => 
-              this.props.navigation.navigate('ReceipeScreen', {categoryId: item._id})}>
-                <View style={styles.imageView}>
-                  <Image
-                    style={styles.image}
-                    source={{
-                      uri: item.image,
-                    }}
-                  />
-                </View>
-                <Text style={styles.itemText}>{item.name}</Text>
-                {/* <Text style={styles.productCount}>{item.count}</Text> */}
-                <AntDesign style={styles.rightIcon} name="caretright" size={24} color="black" />
-              </TouchableOpacity>
+            <TouchableOpacity style={styles.recipeCardStyle} onPress={() => 
+                this.props.navigation.navigate('ReceipeScreen', {categoryId: item._id})}>
+                  <View style={styles.imageView}>
+                    <Image
+                      style={styles.image}
+                      source={{
+                        uri: item.image,
+                      }}
+                    />
+                  </View>
+                  <Text style={styles.itemText}>{item.name}</Text>
+                </TouchableOpacity>
+              
           )}/>
         </SafeAreaView>
       </View>
     );
   }
 }
+
+
+const deviceWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     justifyContent: 'flex-start',
     
   },
-  item: {
-    padding: 12,
-    borderColor: '#000',
-    // backgroundColor: '#e2ffd4',
-    borderBottomWidth: 1,
-    borderRadius: 5,
-    display: 'flex',
-    flexDirection: 'row',
+  // item: {
+  //   padding: 12,
+  //   borderColor: '#000',
+  //   // backgroundColor: '#e2ffd4',
+  //   borderBottomWidth: 1,
+  //   borderRadius: 5,
+  //   display: 'flex',
+  //   flexDirection: 'row',
+  //   alignItems: 'center'
+  // },
+  recipeCardStyle:
+  {
+    margin: 5,
+    marginTop: 8,
+    width: ((deviceWidth-25)/2)-10,
+    backgroundColor: "#fff",
+    height: 150,
+    borderRadius: 6,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 5,
+      height: 5
+    },
+    shadowOpacity: 0.25,
+    elevation: 9,
+    shadowRadius: 5,
+    justifyContent: 'center',
     alignItems: 'center'
   },
   itemText: {
     marginLeft: 10,
     marginTop: 3,
-    flexGrow: 2,
     fontSize: 20,
     fontWeight: 'bold',
   },
@@ -77,10 +98,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     width: 80, 
     height: 80,
-    padding: 10,
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: 'tomato',
+    resizeMode: 'cover',
     backgroundColor: '#FFF',
   },
   image: {

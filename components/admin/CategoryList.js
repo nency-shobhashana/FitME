@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { SafeAreaView, FlatList, StyleSheet, Text, Button, TouchableOpacity, View, Image, TextInput } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet, Text, Button, TouchableOpacity, View, Image, Dimensions, TextInput } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import {firebaseApp} from '../../firebase-config';
 import {HOST_URL} from '../../commonConfig'
@@ -68,7 +68,7 @@ export default class Category extends Component {
           data={this.state.categories}
           extraData={this.state}
           renderItem={({item}) => (
-              <View style={styles.item}>
+              <View style={styles.recipeCardStyle}>
                 <View style={styles.imageView}>
                   <Image
                     style={styles.image}
@@ -93,9 +93,10 @@ export default class Category extends Component {
   }
 }
 
+const deviceWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF',
+    // backgroundColor: '#FFF',
     flex: 1,
     padding: 20,
   },
@@ -137,19 +138,32 @@ const styles = StyleSheet.create({
   item: {
     padding: 12,
     borderColor: '#000',
-    // backgroundColor: '#e2ffd4',
-    borderBottomWidth: 1,
-    borderRadius: 5,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
   },
+  recipeCardStyle:
+  {
+    display: 'flex',
+    flexDirection: 'row',
+    // margin: 15,
+    padding: 15,
+    marginTop: 10,
+    backgroundColor: "#fff",
+    height: 120,
+    borderRadius: 6,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 5,
+      height: 5
+    },
+    shadowOpacity: 0.25,
+    elevation: 9,
+    shadowRadius: 5,
+    alignItems: 'center'
+  },
   button: {
     padding: 12,
-    borderColor: '#000',
-    // backgroundColor: '#e2ffd4',
-    borderBottomWidth: 1,
-    borderRadius: 5,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
