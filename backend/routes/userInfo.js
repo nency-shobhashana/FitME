@@ -77,9 +77,8 @@ router.route('/update').post((req,res) => {
   const firstname = req.body.firstname;
   const date = req.body.date;
   const gender = req.body.gender;
-  const isPaid = req.body.isPaid;
 
-  UserInfo.updateOne({userId: userid} , {firstname: firstname, date: date, gender: gender, isPaid: isPaid}, 
+  UserInfo.updateOne({userId: userid} , {firstname: firstname, date: date, gender: gender}, 
     function(err, numberAffected, rawResponse) {
     //handle it
      })
