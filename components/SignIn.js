@@ -136,7 +136,7 @@ googleSignUp = () =>
                   <TouchableOpacity style={[styles.signUpGoogle, {color: 'black'}]} onPress={() => this.googleSignUp()}>
                       <Text style={styles.signUpGoogleText}>Continue with Google</Text>
                   </TouchableOpacity>    
-              </View>
+            </View>
 
             <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('SignUp')}}>Register Here!</Text>
             {/* <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('Payment')}}>Subscribe</Text> */}
