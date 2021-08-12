@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   signUp:
   {
     paddingHorizontal: 15,
-    height: 40,
+    height: 30,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,

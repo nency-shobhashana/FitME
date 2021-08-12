@@ -4,6 +4,7 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Ima
 import {firebaseApp} from '../firebase-config';
 import axios from "axios";
 import { HOST_URL } from '../commonConfig';
+import moment from 'moment'; 
 
 class Bmi extends React.Component {
 
@@ -77,13 +78,16 @@ class Bmi extends React.Component {
   
   render()
   {
+
+    var currentDate = new Date();
+
     return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.content}>
 
             <View style ={styles.topCardStyle}>
-              <Text style={styles.dateText}>{new Date().getDate()}/{new Date().getMonth() + 1}/{new Date().getFullYear()}</Text>
+              <Text style={styles.dateText}>{moment(currentDate).format("MMMM Do YYYY")}</Text>
             </View>
 
             {/* Height */}

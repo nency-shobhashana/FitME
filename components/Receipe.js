@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flexGrow: 1,
-    resizeMode: "center",
+    resizeMode: "cover",
   },
 });
 

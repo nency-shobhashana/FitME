@@ -17,7 +17,7 @@ export default class Product extends Component {
       productIngredients: '',
       bmi:'',
       categories:[],
-      receipeTypes:["Veg", "NonVeg", "Kito", "Vegan"]
+      receipeTypes:["Veg", "NonVeg", "Keto", "Vegan"]
     }
   }
 
@@ -220,9 +220,6 @@ const styles = StyleSheet.create({
   TextInput:
   {
     borderWidth: 1,
-    // borderColor: 'grey',
-    // flex: 1,
-    // fontSize: 15,
     padding: 15,
     marginBottom: 15,
   },

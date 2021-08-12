@@ -99,9 +99,9 @@ googleSignUp = () =>
     const { navigate } = this.props.navigation;
 
     return (
-      <ScrollView>
+     
       <View style={styles.container}>
-        
+        <ScrollView>
           <View style={styles.header}>
             {/* <Image source={require('../assets/logo.png')}/> */}
             <Image
@@ -149,19 +149,13 @@ googleSignUp = () =>
                   </TouchableOpacity>    
               </View>
 
-              <View style={styles.signGoogle}>
-                  <TouchableOpacity style={[styles.signUpGoogle, {color: 'black'}]} onPress={() => this.googleSignUp()}>
-                      <Text style={styles.signUpGoogleText}>Continue with Google</Text>
-                  </TouchableOpacity>    
-              </View>
-
               <View style={styles.signInbutton}>    
                   <Text style={[{textAlign: 'center'}, {marginTop: 5}]} onPress={()=>{this.props.navigation.navigate('SignIn')}}>Login Here!</Text>
               </View>
           </View>
-        
+          </ScrollView>
+
       </View>
-      </ScrollView>
   );
   }   
 }

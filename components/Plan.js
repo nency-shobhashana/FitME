@@ -57,16 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     
   },
-  // item: {
-  //   padding: 12,
-  //   borderColor: '#000',
-  //   // backgroundColor: '#e2ffd4',
-  //   borderBottomWidth: 1,
-  //   borderRadius: 5,
-  //   display: 'flex',
-  //   flexDirection: 'row',
-  //   alignItems: 'center'
-  // },
+
   recipeCardStyle:
   {
     display: 'flex',
@@ -76,7 +67,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     padding: 15,
     backgroundColor: "#fff",
-    height: 150,
     borderRadius: 6,
     shadowColor: '#000',
     shadowOffset: {
@@ -98,8 +88,8 @@ const styles = StyleSheet.create({
   },
   imageView: {
     display: 'flex',
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     resizeMode: 'cover',
     backgroundColor: '#FFF',
   },

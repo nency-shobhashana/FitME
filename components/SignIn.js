@@ -82,8 +82,9 @@ googleSignUp = () =>
   render()
   {
     return (
-    <ScrollView>
+    
       <View style={styles.container}>
+        <ScrollView>
         
           <View style={styles.header}>
             
@@ -132,17 +133,13 @@ googleSignUp = () =>
                 </TouchableOpacity>    
             </View>
 
-            <View style={styles.signGoogle}>
-                  <TouchableOpacity style={[styles.signUpGoogle, {color: 'black'}]} onPress={() => this.googleSignUp()}>
-                      <Text style={styles.signUpGoogleText}>Continue with Google</Text>
-                  </TouchableOpacity>    
-            </View>
 
             <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('SignUp')}}>Register Here!</Text>      
         </View>
         
+        </ScrollView>
       </View>
-    </ScrollView>
+    
   );
   }  
 }
