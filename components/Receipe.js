@@ -70,9 +70,7 @@ class Receipe extends React.Component {
       <View style={styles.container}>
         <SafeAreaView>
           <FlatList
-            columnWrapperStyle={{ justifyContent: "space-evenly" }}
             data={this.state.products}
-            numColumns={2}
             extraData={this.state}
             renderItem={({ item }) => {
               return (
@@ -130,11 +128,11 @@ const styles = StyleSheet.create({
 
   recipeCardStyle:
   {
-    margin: 5,
+    flexDirection: 'row',
+    margin: 15,
+    padding: 15,
     marginTop: 8,
-    width: ((deviceWidth-25)/2)-10,
     backgroundColor: "#fff",
-    height: 180,
     borderRadius: 6,
     shadowColor: '#000',
     shadowOffset: {
@@ -268,9 +266,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   itemText: {
-    textAlign: "center",
+    flex: 1,
     marginTop: 5,
     fontSize: 20,
+    marginLeft: 15,
     fontWeight: "bold",
   },
   itemPrice: {
@@ -282,12 +281,8 @@ const styles = StyleSheet.create({
   },
   imageView: {
     display: "flex",
-    width: 120,
-    height: 120,
-    padding: 10,
-    borderWidth: 2,
-    borderColor: "tomato",
-    backgroundColor: "#FFF",
+    width: 80,
+    height: 80,
   },
   image: {
     flexGrow: 1,

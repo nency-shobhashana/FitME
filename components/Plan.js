@@ -26,10 +26,8 @@ class Plan extends React.Component {
       <View style={styles.container}>
         <SafeAreaView>
           <FlatList
-          columnWrapperStyle={{ justifyContent: "space-evenly" }}
           data={this.state.categories}
           extraData={this.state}
-          numColumns={2}
           renderItem={({item}) => (
             <TouchableOpacity style={styles.recipeCardStyle} onPress={() => 
                 this.props.navigation.navigate('ReceipeScreen', {categoryId: item._id})}>
@@ -71,9 +69,12 @@ const styles = StyleSheet.create({
   // },
   recipeCardStyle:
   {
-    margin: 5,
-    marginTop: 8,
-    width: ((deviceWidth-25)/2)-10,
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'row',
+    margin: 15,
+    marginTop: 5,
+    padding: 15,
     backgroundColor: "#fff",
     height: 150,
     borderRadius: 6,
@@ -89,6 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   itemText: {
+    flex: 1,
     marginLeft: 10,
     marginTop: 3,
     fontSize: 20,

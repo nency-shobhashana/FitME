@@ -57,7 +57,7 @@ export default function dietReceipe(props) {
   const renderTabBar = props => (
   	<TabBar
      	 {...props}
-      	activeColor={'#75C34D'}
+      	activeColor={'#EB6C3E'}
       	inactiveColor={'black'}
           style={{backgroundColor:'#FFF', fontWeight: 'bold' }}
   	/>
