@@ -98,14 +98,14 @@ const styles = StyleSheet.create({
   },
   imageView: {
     display: 'flex',
-    width: 155,
-    height: 116,
+    width: 80,
+    height: 80,
     resizeMode: 'cover',
     backgroundColor: '#FFF',
   },
   image: {
     flexGrow: 1,
-    resizeMode: 'center',
+    resizeMode: 'cover',
   },
   productCount: {
     flexShrink:1,

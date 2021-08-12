@@ -5,6 +5,18 @@ import { AntDesign } from '@expo/vector-icons';
 import {HOST_URL} from '../../commonConfig'
 
 export default class Product extends Component {
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+    headerRight: () => (
+      <View style={{marginEnd: 20}}>
+        <TouchableOpacity style={[styles.signUp]} onPress={()=>{navigation.navigate('adminProduct')}}>
+            <Text style={[styles.signbtnText, {textAlign: 'center'}]} >ADD</Text>
+        </TouchableOpacity>
+      </View>
+    ),
+  };
+};
   
   state = { products: ''}
 
@@ -44,11 +56,7 @@ export default class Product extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.signUpbutton}>
-            <TouchableOpacity style={[styles.signUp]} onPress={()=>{this.props.navigation.navigate('adminProduct')}}>
-                <Text style={[styles.signbtnText, {textAlign: 'center'}]} >Add New Recipe</Text>
-            </TouchableOpacity>
-        </View>
+        
         <SafeAreaView>
         <FlatList
           data={this.state.products}
@@ -101,8 +109,8 @@ const styles = StyleSheet.create({
   },
   signUp:
   {
-    width: '100%',
-    height: 50,
+    paddingHorizontal: 15,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
@@ -180,7 +188,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flexGrow: 1,
-    resizeMode: 'center'
+    resizeMode: 'cover'
   },
   productCount: {
     flexShrink:1,

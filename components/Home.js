@@ -324,8 +324,8 @@ const styles = StyleSheet.create({
 
   imageView: {
     display: "flex",
-    width: 155,
-    height: 116,
+    width: 80,
+    height: 80,
   },
   image: {
     flexGrow: 1,

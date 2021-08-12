@@ -18,11 +18,11 @@ const dashboardStack = createStackNavigator({
 });
 
 const categoryStack = createStackNavigator({
-  CategoryList: CategoryList,
+  Categories: CategoryList,
 });
 
 const productStack = createStackNavigator({
-  ProductList: ProductList,
+  Receipes: ProductList,
 });
 
 const userInfoStack = createStackNavigator({
