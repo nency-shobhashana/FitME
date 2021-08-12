@@ -7,22 +7,19 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Home from './Home';
 import Plan from './Plan';
-import Chat from './Chat';
 import Progress from './Progress';
 import Me from './Me';
-// import StripeApp from './StripeApp';
+import About from './aboutDietician';
 
 const PlanStack = createStackNavigator({
     Plan: Plan,
-//   Category: Category,
-//   ProductList: ProductList,
 });
 const ProgressStack = createStackNavigator({
   Progress: Progress,
 });
 
 const ChatStack = createStackNavigator({
-    Chat: Chat,
+    Chat: About,
 });
 
 const MeStack = createStackNavigator({

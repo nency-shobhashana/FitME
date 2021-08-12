@@ -14,7 +14,7 @@ import adminUserInfo from './components/admin/UserInfo';
 import adminProfile from './components/admin/Profile';
 import UserDetail from './components/UserDetail';
 import HomeScreen from './components/HomeScreen';
-import Chat from './components/Chat';
+import Message from './components/Chat';
 import Progress from './components/Progress';
 import Plan from './components/Plan';
 import Me from './components/Me';
@@ -26,6 +26,7 @@ import StripeApp from './components/StripeApp';
 import AddadminInfo from './components/admin/AddadminInfo';
 import UpdateProfile from './components/admin/UpdateProfile';
 import SplashScreen from './components/SplashScreen';
+import About from './components/aboutDietician';
 
 
 const Navigator = createStackNavigator({
@@ -44,7 +45,7 @@ const Navigator = createStackNavigator({
   adminUserInfo: { screen: adminUserInfo },
   adminProfile: {screen: adminProfile},
   UserDetail: { screen: UserDetail},
-  Chat: { screen: Chat},
+  Message: { screen: Message},
   Progress: { screen: Progress},
   Plan: { screen: Plan},
   Me: { screen: Me},
@@ -54,7 +55,7 @@ const Navigator = createStackNavigator({
   Payment: { screen: StripeApp },
   AdminInfo: { screen: AddadminInfo },
   UpdateProfile: { screen: UpdateProfile },
-  
+  About: { screen: About }
 },
 
 {

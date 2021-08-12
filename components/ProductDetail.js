@@ -104,9 +104,7 @@ class ProductDetail extends React.Component {
               <Text style={styles.itemDesc}>{this.state.product.ingredients}</Text>
               <Text style={styles.itemtitle}>How to make it:</Text>
               <Text style={styles.itemDesc}>{this.state.product.details}</Text>
-              {/* <TouchableOpacity style={styles.button} onPress={() => this.addTocart(this.props.navigation.getParam('productId'))}>
-                  <Text  style={styles.textBtn}>Add</Text>
-              </TouchableOpacity> */}
+            
             </View>
           </ScrollView>
         </SafeAreaView>

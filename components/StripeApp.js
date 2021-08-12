@@ -12,7 +12,7 @@ import {firebaseApp} from '../firebase-config';
 import axios from "axios";
 
 
-const API_URL = HOST_URL;
+const API_URL = "http://localhost:3000";
 
 const StripeApp = props => {
   
