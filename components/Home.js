@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput, Dimensions } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput, Dimensions,FlatList } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import {firebaseApp} from '../firebase-config';
 import axios from "axios";
@@ -13,7 +13,8 @@ class Home extends React.Component {
   constructor(props) 
   {
     super(props);
-    this.state = {currentBmi: '',isLoading: false, products: "", error: '', quote: ''}
+    this.state = {currentBmi: '',isLoading: false, products: [], error: '', quote: ''}
+    global.recipes = [];
   }
 
   fetchBmi = () =>
@@ -37,9 +38,10 @@ class Home extends React.Component {
 
   fetchRecipe = () =>
   {
-    let url = HOST_URL + "product";
+    var self = this;
+    let url = HOST_URL + "product/randomRecipe";
     axios.get(url).then((res) => {
-        this.setState({ products: res.data });
+        self.setState({ products: res.data });
       });
   }
 
@@ -53,17 +55,18 @@ class Home extends React.Component {
 
   componentDidMount()
 {
+    this.fetchRecipe();
     this.props.navigation.addListener('willFocus', () => {
     this.fetchBmi();
     this.fetchQuote();
   });
-
+  
 }
 
   render()
   {
     var currentDate = new Date();
-
+    
     return (
     <ScrollView>
       <View style={styles.container}>
@@ -110,69 +113,39 @@ class Home extends React.Component {
 
       </View>
 
+      {/* *********************************************** */}
+
       <Text style={[styles.text_section, { margin: 10 }]}>Recipes</Text>
 
-      <View style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
-
-          <View style ={styles.recipeCardStyle}>
-              <View style={{alignItems: 'center', padding: 10}}>
-              <Image
-                style={{ width: 155, height: 116,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
-                source={require('./recipe1.png')}
-                />
-              </View>
-
-              <View style={{alignItems: 'center', padding: 10}}>
-                  <Text style={{marginBottom: 10, fontSize: 20, color: '#000'}}>Tacos Dishes</Text> 
-              </View>
-          </View>
-
-
-          <View style ={styles.recipeCardStyle}>
-              <View style={{alignItems: 'center', padding: 10}}>
-                <Image
-                  style={{ width: 155, height: 116,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
-                  source={require('./recipe2.png')}
-                  />
-              </View>
-
-              <View style={{alignItems: 'center', padding: 10}}>
-                    <Text style={{marginBottom: 10, fontSize: 20, color: '#000'}}>Salads</Text> 
-              </View>
-          </View>
-
-      </View>
-
-
-      <View style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
-
-          <View style ={styles.recipeCardStyle}>
-              <View style={{alignItems: 'center', padding: 10}}>
-                <Image
-                  style={{ width: 155, height: 116,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
-                  source={require('./recipe3.png')}
-                  />
-              </View>
-
-              <View style={{alignItems: 'center', padding: 10}}>
-                  <Text style={{marginBottom: 10, fontSize: 20, color: '#000'}}>Keto Dishes</Text> 
-              </View>
-          </View>
-
-
-          <View style ={styles.recipeCardStyle}>
-              <View style={{alignItems: 'center', padding: 10}}>
-                <Image
-                  style={{ width: 155, height: 116,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
-                  source={require('./recipe4.png')}
-                  />
-              </View>
-
-              <View style={{alignItems: 'center', padding: 10}}>
-                    <Text style={{marginBottom: 10, fontSize: 20, color: '#000'}}>Rice Bowls</Text> 
-              </View>
-          </View>
-      </View>
+      <FlatList
+            // columnWrapperStyle={{ justifyContent: "space-evenly" }}
+            data={this.state.products}
+            numColumns={2}
+            extraData={this.state}
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity
+                  style={styles.recipeCardStyle}
+                  onPress={() =>
+                    this.props.navigation.navigate("ProductDetail", {
+                      productId: item._id,
+                    })
+                  }
+                >
+                  <View style={styles.imageView}>
+                    <Image
+                      style={styles.image}
+                      source={{
+                        uri: item.image,
+                      }}
+                    />
+                  </View>
+                  <Text style={styles.itemText}>{item.name}</Text>
+                </TouchableOpacity>
+              );
+            }}
+            keyExtractor={(item, index) => index.toString()}
+          />
 
        
       <View style ={styles.bottomCardStyle}>
@@ -290,6 +263,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
+
   bottomCardStyle:
   {
     marginTop: 8,
@@ -326,7 +300,37 @@ const styles = StyleSheet.create({
     fontSize: 25,
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+
+  item: {
+    width: '100%',
+    padding: 10,
+    marginVertical: 8,
+    // borderColor: '#000',
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderRadius: 5,
+    alignItems: 'center',
+    // shadowColor: '#000',
+    // shadowRadius: 6,
+    // shadowOpacity: 1,  
+  },
+  itemText: {
+    textAlign: 'center',
+    marginTop: 5,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
+  imageView: {
+    display: "flex",
+    width: 155,
+    height: 116,
+  },
+  image: {
+    flexGrow: 1,
+    resizeMode: "center",
+  },
 
 
 
