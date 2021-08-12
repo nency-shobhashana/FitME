@@ -2,6 +2,38 @@ const express = require('express');
 const router = express.Router();
 let Product = require('../models/product');
 
+router.route('/randomRecipe').get((req,res) => {
+
+    var productCount = 0;
+    var requiredCount = 4;
+    var random;
+    var randoms = [];
+    var recipes = [];
+
+    Product.find()
+        .then((product) => {
+    
+            while(productCount < requiredCount)
+            {
+                random = Math.floor(Math.random() * product.length);
+                if(randoms.includes(random))
+                {
+                    //Do Nothing
+                }
+                else
+                {
+                    randoms.push(random);
+                    recipes.push(product[random]);
+                    productCount ++
+                }
+            }
+
+            res.json(recipes);
+        })
+        .catch(err => res.status(400).json('Error:' + err));
+    
+});
+
 router.route('/').get((req,res) => {
     const categoryId = req.query.categoryId
     const bmi = req.query.bmi
@@ -84,6 +116,11 @@ router.route('/add').post((req,res) => {
         })
         .catch(err => res.status(400).json('Error:' + err));
 });
+
+
+
+
+
 
 
 module.exports = router;

@@ -5,14 +5,15 @@ import { MaterialIcons } from '@expo/vector-icons';
 import {firebaseApp} from '../firebase-config';
 import axios from "axios";
 import { HOST_URL } from '../commonConfig'
-import { StackActions, NavigationActions } from 'react-navigation'; 
+import { StackActions, NavigationActions } from 'react-navigation';
+import moment from 'moment'; 
 
 class Home extends React.Component {
 
   constructor(props) 
   {
     super(props);
-    this.state = {currentBmi: '',isLoading: false, products: "", error: ''}
+    this.state = {currentBmi: '',isLoading: false, products: "", error: '', quote: ''}
   }
 
   fetchBmi = () =>
@@ -42,47 +43,71 @@ class Home extends React.Component {
       });
   }
 
+  fetchQuote = () =>
+  {
+    axios.get(HOST_URL + "quote/randomQuote").then((res) =>
+    {
+        this.setState({ quote: res.data.quotes})
+    })
+  }
+
   componentDidMount()
 {
     this.props.navigation.addListener('willFocus', () => {
-    this.fetchBmi()
-
+    this.fetchBmi();
+    this.fetchQuote();
   });
- 
+
 }
 
   render()
   {
+    var currentDate = new Date();
+
     return (
     <ScrollView>
       <View style={styles.container}>
       
       <View style ={styles.topCardStyle}>
-          <Text style={styles.dateText}>{new Date().getDate()}/{new Date().getMonth() + 1}/{new Date().getFullYear()}</Text>
+          <Text style={styles.dateText}>{moment(currentDate).format("MMMM Do YYYY")}</Text>
       </View>
 
       <View style ={styles.bmiCardStyle}>
           <View style={{alignItems: 'center'}}>
-                <Text style={styles.bmiText}>Your Current BMI is {this.state.currentBmi}</Text>
+             <View style={{ display: 'flex', flexDirection: 'row', paddingLeft: 20, paddingRight: 20, paddingTop: 20, paddingBottom: 5}}>
+
+               <View style={{ display: 'flex', flexDirection: 'column', width: '20%'}}>
+                  <Image
+                    style={{ width: 50, height: 50,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain', padding: 5}}
+                    source={require('./clock.png')}
+                    />
+               </View>
+
+               <View style={{ display: 'flex', flexDirection: 'column', width: '60%', alignItems: 'center', backgroundColor: 'white'}}>
+                  <Text style={styles.bmiText}>Your Current BMI is {this.state.currentBmi}</Text>
+               </View>
+
+               <View style={{ display: 'flex', flexDirection: 'column', width: '20%'}}>
+                  
+               </View>
+
+              </View>
             </View>
             
-            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', padding: 20 }}>
-
-                <Image
-                style={{ width: 50, height: 50,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
-                source={require('./clock.png')}
-                />
-
-                <View style={{alignItems: 'center', padding: 10}}>
-                    <Text style={{ fontWeight: 'bold', marginBottom: 10, fontSize: 15}}>“The Groundwork 
-                    for all Happiness” </Text> 
+          
+            <View style={{alignItems: 'center', justifyContent: 'center', width: '100%'}}>
+                <View style={{alignItems: 'center', padding: 10, flexWrap: 'wrap'}}>
+                    <Text style={{ fontWeight: 'bold', marginBottom: 10, fontSize: 15, alignItems: 'center', flexWrap: 'wrap', textAlign: 'center', backgroundColor: 'light-grey'}}>"{this.state.quote}"</Text> 
                 </View>
             </View>
-            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+            
+            <View style={{justifyContent: 'center', alignItems: 'center', padding: 5}}>
                 <TouchableOpacity style={styles.roundButton1} onPress={()=>{this.props.navigation.navigate('Bmi')}}>
                     <Text style={styles.roundBtnText}>+</Text>
                 </TouchableOpacity>
             </View>
+
+
       </View>
 
       <Text style={[styles.text_section, { margin: 10 }]}>Recipes</Text>
@@ -195,9 +220,10 @@ const styles = StyleSheet.create({
 
   bmiText:
   {
-    fontSize: 16,  
+    fontSize: 18,  
     color: '#EB6C3E',
-    margin: 8,
+    margin: 2,
+    fontWeight: '700'
   },
 
   profileFooterBtn:
@@ -232,7 +258,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     width: deviceWidth-25,
     backgroundColor: "#fff",
-    height: 200,
+    // height: 200,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
@@ -291,7 +317,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 100,
     backgroundColor: '#F19C7D',
-    
+    marginBottom: 10,
   },
 
   roundBtnText:

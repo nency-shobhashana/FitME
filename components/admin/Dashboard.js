@@ -67,6 +67,13 @@ class Dashboard extends React.Component {
             <Text style={styles.text}>{this.state.userCount}</Text>
           </View>
         </View>
+
+        <View style={styles.recipeCardStyle}>
+          <View style={styles.item}>
+            <Text style={styles.itemText} onPress={()=>{this.props.navigation.navigate('AddQuote')}}>Add Quotes</Text>
+          </View>
+        </View>
+
       </View>
     </ScrollView>
   );

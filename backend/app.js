@@ -32,6 +32,7 @@ const userRoute = require('./routes/userInfo');
 const bmiRoute = require('./routes/bmi');
 const dieticianRoute = require('./routes/dietician');
 const chatRoute = require('./routes/chat');
+const quoteRoute = require('./routes/quotes');
 
 //Routes
 app.get('/', (req, res) => {
@@ -74,8 +75,8 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, (err) =>{
     app.use('/product', productRoute);
     app.use('/dashboard', boardRoute);
     app.use('/dietician', dieticianRoute);
-    app.use('/chat',chatRoute)
-
+    app.use('/chat',chatRoute);
+    app.use('/quote', quoteRoute);
 })
 
 app.listen(3000);
