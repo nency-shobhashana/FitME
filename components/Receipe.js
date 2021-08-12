@@ -283,6 +283,7 @@ const styles = StyleSheet.create({
     display: "flex",
     width: 80,
     height: 80,
+    resizeMode: 'cover'
   },
   image: {
     flexGrow: 1,
