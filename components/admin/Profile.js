@@ -158,7 +158,7 @@ class Profile extends React.Component {
 
       <View style={styles.profileFooterBtn}>
           <TouchableOpacity style={styles.button} onPress={() => this.signOutUser()}>
-            <Text>Logout</Text>
+            <Text style={[{color: 'white'}, {fontSize: 16}]}>Logout</Text>
           </TouchableOpacity>
       </View>
 

@@ -42,16 +42,10 @@ class AddQuote extends React.Component   {
       <View style={styles.container}>
         
           <View style={styles.header}>
-            {/* <Image source={require('../assets/logo.png')}/> */}
-          
-           
+      
           </View>
 
-
-        
           <View style={styles.footer}>
-
-              {/* Email */}
 
               <Text style={[styles.text_footer, {marginTop: 15}, {paddingTop: 5}]}>Enter the quote</Text>
               <View style={styles.action}>
@@ -64,8 +58,6 @@ class AddQuote extends React.Component   {
                       <Text style={styles.signbtnText}>Add</Text>
                   </TouchableOpacity>    
               </View>
-
-        
           </View>
         
       </View>

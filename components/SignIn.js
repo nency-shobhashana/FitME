@@ -86,7 +86,7 @@ googleSignUp = () =>
       <View style={styles.container}>
         
           <View style={styles.header}>
-            {/* <Image source={require('../assets/logo.png')}/> */}
+            
             <Image
             style={{ width: 100, height: 100,  alignItems: 'center', justifyContent: 'center', resizeMode: 'contain'}}
             source={require('./logo.png')}
@@ -100,7 +100,7 @@ googleSignUp = () =>
 
             {/* Email */}
 
-            <Text style={[styles.text_footer, {marginTop: 35}, {paddingTop: 5}]}>Email</Text>
+            <Text style={[styles.text_footer, {marginTop: 10}, {paddingTop: 5}]}>Email</Text>
             <View style={styles.action}>
                 <MaterialIcons 
                 name = 'mail-outline'
@@ -138,9 +138,7 @@ googleSignUp = () =>
                   </TouchableOpacity>    
             </View>
 
-            <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('SignUp')}}>Register Here!</Text>
-            {/* <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('Payment')}}>Subscribe</Text> */}
-      
+            <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{this.props.navigation.navigate('SignUp')}}>Register Here!</Text>      
         </View>
         
       </View>

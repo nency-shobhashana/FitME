@@ -56,9 +56,9 @@ class Home extends React.Component {
   componentDidMount()
 {
     this.fetchRecipe();
+    this.fetchQuote();
     this.props.navigation.addListener('willFocus', () => {
     this.fetchBmi();
-    this.fetchQuote();
   });
   
 }
@@ -118,7 +118,7 @@ class Home extends React.Component {
       <Text style={[styles.text_section, { margin: 10 }]}>Recipes</Text>
 
       <FlatList
-            // columnWrapperStyle={{ justifyContent: "space-evenly" }}
+          
             data={this.state.products}
             numColumns={2}
             extraData={this.state}
@@ -306,14 +306,10 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     marginVertical: 8,
-    // borderColor: '#000',
     backgroundColor: '#fff',
     borderWidth: 1,
     borderRadius: 5,
-    alignItems: 'center',
-    // shadowColor: '#000',
-    // shadowRadius: 6,
-    // shadowOpacity: 1,  
+    alignItems: 'center',  
   },
   itemText: {
     textAlign: 'center',
@@ -324,16 +320,13 @@ const styles = StyleSheet.create({
 
   imageView: {
     display: "flex",
-    width: 80,
-    height: 80,
+    width: 155,
+    height: 116,
   },
   image: {
     flexGrow: 1,
     resizeMode: "center",
   },
-
-
-
 });
 
 export default Home;

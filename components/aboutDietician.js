@@ -117,7 +117,6 @@ const styles = StyleSheet.create({
       },
       imageView: 
       {
-         // backgroundColor: 'black'
       },
       image: {
         width:'100%',

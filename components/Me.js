@@ -176,7 +176,7 @@ class Me extends React.Component   {
 
           <View style={styles.profileFooterBtn}>
             <TouchableOpacity style={styles.button} onPress={() => this.signOutUser()}>
-              <Text>Logout</Text>
+              <Text style={[{color: 'white'}, {fontSize: 16}]}>Logout</Text>
             </TouchableOpacity>
           </View>
         
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
 
   button: {
     margin: 8,
-    height: 40,
+    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,

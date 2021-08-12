@@ -129,7 +129,6 @@ return (
         </TouchableOpacity>
       </View>
       <Text style={[{textAlign: 'center'}, {marginTop: 25}]} onPress={()=>{props.navigation.navigate('Home')}}>Go to Home</Text>
-      {/* <Button onPress={handlePayPress} title="Pay" disabled={loading} /> */}
    
         </View>
        </ScrollView>

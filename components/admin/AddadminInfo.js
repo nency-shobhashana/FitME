@@ -41,7 +41,6 @@ class AddadminInfo extends React.Component   {
       })
       .then(res => {
         alert("User data added succesfully");
-        //this.props.navigation.navigate('Home')
       }).catch(error =>{
         console.log(error);
       })   

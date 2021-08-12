@@ -27,26 +27,6 @@ class UserDetail extends React.Component {
       this.setState({ selectedcat: value });
     }
 
-    // addData = () =>
-    // {
-    //   const uid = firebaseApp.auth().currentUser.uid;
-    //   axios.post(HOST_URL + "userInfo/add", {
-    //     firstname: this.state.firstname,
-    //     gender: this.state.selectedcat,
-    //     date: this.state.date,
-    //     height: this.state.height,
-    //     weight: this.state.weight,
-    //     userId: firebaseApp.auth().currentUser.uid,
-    //   })
-    //   .then(res => {
-    //     alert("User data added succesfully");
-    //     this.props.navigation.navigate('Home')
-    //   }).catch(error =>{
-    //     console.log(error);
-    //   })   
-
-    // }
-
      addData = () =>
     {
       const uid = firebaseApp.auth().currentUser.uid;
@@ -115,17 +95,15 @@ class UserDetail extends React.Component {
 
           <DatePicker
           style={styles.datePickerStyle}
-          date={this.state.date} // Initial date from state
-          mode="date" // The enum of date, datetime and time
+          date={this.state.date} 
+          mode="date" 
           placeholder="select date"
           format="DD-MM-YYYY"
-          // minDate="01-01-2016"
           maxDate = {this.state.prsentDate}
           confirmBtnText="Confirm"
           cancelBtnText="Cancel"
           customStyles={{
             dateIcon: {
-              //display: 'none',
               position: 'absolute',
               left: 0,
               top: 4,
@@ -140,9 +118,6 @@ class UserDetail extends React.Component {
           }}
           />
 
-          {/* <TextInput style={styles.resultText} placeholder = "MM-DD-YYYY" onChangeText={date => this.setState({ date })} value={this.state.date} /> */}
-
-
           <Text style={[styles.text_section, { marginTop: 70 }, {marginLeft: 10}, {marginBottom: 20}, { fontSize: 21 }]}>Where Are We Now?</Text>
 
           <View style={styles.footer}>
@@ -151,8 +126,6 @@ class UserDetail extends React.Component {
 
                   <Text style={[styles.text_footer, { margin: 10 }, { fontSize: 15 }]}>Enter the Weight</Text>
                   <TextInput style={styles.resultText} placeholder="Weight in kg" onChangeText={weight => this.setState({ weight })} value={this.state.weight} />
-
-                  {/* <Text style={[styles.text_section, { margin: 10}, { fontSize: 15 }]}>Your BMI is</Text> */}
 
                   <View style={styles.submitbutton}>
                     <TouchableOpacity style={[styles.submit, {color: 'black'}]} onPress={() => this.addData()}>
