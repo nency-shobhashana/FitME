@@ -65,6 +65,7 @@ export default class Category extends Component {
         </View>
         <SafeAreaView>
           <FlatList
+          contentContainerStyle={{paddingBottom:20}}
           data={this.state.categories}
           extraData={this.state}
           renderItem={({item}) => (
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
   signUpbutton:
   {
     alignItems: 'center',
-    marginTop: 30,
+    // marginTop: 15,
   },
   signUp:
   {
@@ -178,11 +179,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     width: 80, 
     height: 80,
-    padding: 10,
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: 'tomato',
-    backgroundColor: '#FFF',
+    resizeMode: 'cover',
   },
   image: {
     flexGrow: 1,

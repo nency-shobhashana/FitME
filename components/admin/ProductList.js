@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
   signUpbutton:
   {
     alignItems: 'center',
-    marginTop: 30,
   },
   signUp:
   {
@@ -177,11 +176,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     width: 80, 
     height: 80,
-    padding: 10,
-    borderRadius: 100,
-    borderWidth: 2,
-    borderColor: 'tomato',
-    backgroundColor: '#FFF',
+    resizeMode: 'cover',
   },
   image: {
     flexGrow: 1,
